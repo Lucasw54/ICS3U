@@ -3,7 +3,8 @@
  * Class code: ICS3U 
  * Date:Friday, March 2, 2022 
  * Assignment #: 9
- * Description: 
+ * Description: Using if and switch case statements create a system to record the fine and ammount of
+ * Demerit points added depending on the PenaltyLevel.
  */
 package com.LucasWall.SpeedTrap;
 
@@ -31,6 +32,7 @@ public class SpeedTrap {
 	private static JLabel PenLevelLabel;
 	private static JLabel FineLabel;
 	private static JLabel DemeritLabel;
+	private static JLabel BonusPenaltyLabel;
 	private static JLabel DriveSafely;
 	
 	private static String Name = "";
@@ -39,6 +41,7 @@ public class SpeedTrap {
 	private static String PenaltyLevel = "";
 	private static double fine = 0;
 	private static double Demerits = 0;
+	private static String BonusPenalty = "false";
 	
 	
 	public static final Color VERY_LIGHT_RED = new Color(255,102,102);
@@ -46,9 +49,10 @@ public class SpeedTrap {
 	public static final Color BLACK = new Color(0,0,0);
 	public static final Color LIGHT_BLUE = new Color(227, 255, 253);
 	
-	DecimalFormat money = new DecimalFormat("$#,###.00");
+	static DecimalFormat money = new DecimalFormat("$#,###.00");
 	static DecimalFormat speed = new DecimalFormat("#,### Km/h");
-	DecimalFormat license = new DecimalFormat("#####-#####-#####");
+	static DecimalFormat license = new DecimalFormat("#####-#####-#####");
+	static DecimalFormat num = new DecimalFormat("#,###");
 
 	
 	public static void main(String[] args) {
@@ -66,37 +70,60 @@ public class SpeedTrap {
 		System.out.println("\nWhat was the speed that the vehicle was travelling in the school zone?");
 		VehicleSpeed = Uin_speed.nextInt();
 		
+		if(VehicleSpeed > 50 && VehicleSpeed <= 58) {
+			PenaltyLevel = "Warning";
+		}
+		if(VehicleSpeed > 58 && VehicleSpeed <= 68) {
+			PenaltyLevel = "Minimum";
+		}
+		if(VehicleSpeed > 68 && VehicleSpeed <= 80) {
+			PenaltyLevel = "Maximum";
+		}
+		if(VehicleSpeed > 80) {
+			PenaltyLevel = "Severe";
+		}
+		if(VehicleSpeed < 50) {
+			PenaltyLevel = "NoPenalty";
+		}
+		
 		switch(PenaltyLevel) {
 		
 			case "Warning":
 			{
-				shirt_price = 9.99;
+				fine = 0;
+				Demerits = 0;
 				break;
 			}
 			
 			case "Minimum":
 			{
-				shirt_price = 14.99;
+				fine = 250;
+				Demerits = 3;
 				break;
 			}
 		
 			case "Maximum":
 			{
-				shirt_price = 19.99;
+				fine = 500;
+				Demerits = 4;
 				break;
 			}
 			case "Severe":
 			{
-				shirt_price = 19.99;
+				fine = 1000;
+				Demerits = 4;
+				BonusPenalty = "true";
 				break;
 			}
 			case "NoPenalty":
 			{
-				shirt_price = 19.99;
+				fine = 0;
+				Demerits = 0;
 				break;
 			}
 	}
 		GUI();
+		Bonus();
 		
 	}//End of main
 	
@@ -114,7 +141,7 @@ public class SpeedTrap {
 		frame.setLocationRelativeTo(null);
 		frame.setBackground(DARK_GREY);
 		
-		CardsForceLabel = new JLabel("Cards Police Force");
+		CardsForceLabel = new JLabel("Wall's Police Force");
 		CardsForceLabel.setBounds(0,10,600,20);
 		panel.add(CardsForceLabel);
 		CardsForceLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -144,17 +171,21 @@ public class SpeedTrap {
 		OffenseLabel.setBounds(40,170,200,20);
 		panel.add(OffenseLabel);
 		
-		PenLevelLabel = new JLabel("HMM:" + " Penalty level");
+		PenLevelLabel = new JLabel("Penalty Level: " + PenaltyLevel);
 		PenLevelLabel.setBounds(40,210,200,20);
 		panel.add(PenLevelLabel);
 		
-		FineLabel = new JLabel("Fine:");
+		FineLabel = new JLabel("Fine: " + money.format(fine));
 		FineLabel.setBounds(40,230,200,20);
 		panel.add(FineLabel);
 		
-		DemeritLabel = new JLabel("Points Taken:");
-		DemeritLabel.setBounds(40,250,1,20);
+		DemeritLabel = new JLabel("Points Added: " + num.format(Demerits) + " Demerits added");
+		DemeritLabel.setBounds(40,250,300,20);
 		panel.add(DemeritLabel);
+		
+		BonusPenaltyLabel = new JLabel("Vehicle Impound and License Suspension");
+		BonusPenaltyLabel.setBounds(40,270,300,20);
+		panel.add(BonusPenaltyLabel);
 		
 		DriveSafely = new JLabel("Please drive carefully and obey speed limits in school zones.");
 		DriveSafely.setBounds(0,340,600,20);
@@ -162,6 +193,17 @@ public class SpeedTrap {
 		DriveSafely.setHorizontalAlignment(JLabel.CENTER);
 
 		frame.setVisible(true);
-		frame.setTitle("Test GUI");
+		frame.setTitle("Vehicle Reports");
+	}
+	
+	public static void Bonus() {
+		if(BonusPenalty.equals("true"))
+		{
+			BonusPenaltyLabel.setVisible(true);
+		}
+		else if(BonusPenalty.equals("false"))
+		{
+			BonusPenaltyLabel.setVisible(false);
+		}
 	}
 }
