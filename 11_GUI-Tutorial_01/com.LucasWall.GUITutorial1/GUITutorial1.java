@@ -21,9 +21,10 @@ import javax.swing.JTextField;
 public class GUITutorial1 implements ActionListener
 {//Beginning of GUITutorial1
 	//---------Gui Globals
-	//Labels
 	private static JPanel pnl_panel;
 	private static JFrame fr_frame;
+	
+	//Labels
 	private static JLabel lbl_Title;
 	private static JLabel lbl_ThisIsALabel;
 	private static JLabel lbl_ThisIsColourAndFont;
