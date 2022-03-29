@@ -1,6 +1,15 @@
+/*
+ * Name:Lucas Wall
+ * Class code: ICS3U 
+ * Date:Friday, March 28, 2022 
+ * Assignment #: 11
+ * Description: Explore GUI elements aswell as set text and get text methods, using proper naming 
+ * conventions to create a basic java GUI. The goal of this programe is to 
+ */
 package com.LucasWall.GUITutorial1;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,136 +22,144 @@ import javax.swing.JTextField;
 
 public class GUITutorial1 implements ActionListener {
 	
-	//Gui Globals
-	private static JPanel panel;
-	private static JFrame frame;
-	private static JLabel TitleLabel;
-	private static JLabel ThisIsALabelLabel;
-	private static JLabel ThisIsColourAndFont;
-	private static JLabel ThisIsAPushButtonLabel;
-	private static JLabel ThisIsATextFieldLabel;
-	private static JLabel ThisLabelWillChangeLabel;
-	private static JSeparator Section1;
-	private static JSeparator Section2;
-	private static JSeparator Section3;
-	private static JTextField TextToLabelTextField;
-	private static JButton TurnOnButton;
-	private static JButton TurnOffButton;
-	private static JButton TextToLabelButton;
-	private static JButton ExitButton;
+	//---------Gui Globals
+	//Labels
+	private static JPanel pnl_panel;
+	private static JFrame fr_frame;
+	private static JLabel lbl_Title;
+	private static JLabel lbl_ThisIsALabel;
+	private static JLabel lbl_ThisIsColourAndFont;
+	private static JLabel lbl_ThisIsAPushButton;
+	private static JLabel lbl_ThisIsATextField;
+	private static JLabel lbl_ThisLabelWillChange;
+	
+	//Separators
+	private static JSeparator sep_Title;
+	private static JSeparator sep_Top;
+	private static JSeparator sep_Bottom;
+	
+	//Textfields
+	private static JTextField txt_TextToLabel;
+	
+	//Buttons
+	private static JButton btn_TurnOn;
+	private static JButton btn_TurnOff;
+	private static JButton btn_TextToLabel;
+	private static JButton btn_Exit;
 	
 	//Other Globals
 	private static String TextInTextBox;
 	
-	public static final Color VERY_LIGHT_RED = new Color(255,102,102);
-	public static final Color DARK_GREY = new Color(102,102,102);
+	//Creating Custom Colours
+	private static final Color VERY_LIGHT_RED = new Color(255,102,102);
+	private static final Color DARK_GREY = new Color(102,102,102);
 	
 	public enum Actions
 	{//Beginning of Actions
-		TURNON,
-		TURNOFF,
-		TEXTTOLABEL,
-		EXIT
-		
+		TURNON, //Action to turn on the text to label maker
+		TURNOFF, //Action to turn off the text to label maker
+		TEXTTOLABEL, //Action which sets 'lbl_ThisLabelWillChange' to whatever is in the 'txt_TextToLabel'
+		EXIT//Dispose's the frame and ends program
 	}//End of Actions
 	
 	public static void GUI() {
+		//Creates a new instance variable
 		GUITutorial1 instance = new GUITutorial1();
 		
 		//Panel Config
-		panel = new JPanel();
-		panel.setBackground(VERY_LIGHT_RED);
-		panel.setLayout(null);
+		pnl_panel = new JPanel();
+		pnl_panel.setBackground(VERY_LIGHT_RED);
+		pnl_panel.setLayout(null);
 		
 		//Frame Config
-		frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(panel);
-		frame.setSize(600, 400);
-		//frame.setLocationRelativeTo(null);
-		frame.setBackground(DARK_GREY);
-		
+		fr_frame = new JFrame();
+		fr_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fr_frame.add(pnl_panel);
+		fr_frame.setSize(600, 400);
+		fr_frame.setLocationRelativeTo(null);
+		fr_frame.setBackground(DARK_GREY);
 		
 		//Labels
-		TitleLabel = new JLabel("Text Field to Label Machine");
-		TitleLabel.setBounds(10,10,600,20);
-		panel.add(TitleLabel);
-		TitleLabel.setHorizontalAlignment(JLabel.CENTER);
+		lbl_Title = new JLabel("Text Field to Label Machine");
+		lbl_Title.setBounds(10,10,600,20);
+		pnl_panel.add(lbl_Title);
+		lbl_Title.setHorizontalAlignment(JLabel.CENTER);
+		lbl_Title.setFont(new Font("Serif", Font.BOLD, 18));
 		
-		ThisIsALabelLabel = new JLabel("This is a label!");
-		ThisIsALabelLabel.setBounds(120, 80, 120, 20);
-		panel.add(ThisIsALabelLabel);
+		lbl_ThisIsALabel = new JLabel("This is a label!");
+		lbl_ThisIsALabel.setBounds(120, 80, 120, 20);
+		pnl_panel.add(lbl_ThisIsALabel);
 		
-		ThisIsColourAndFont = new JLabel("Check out this Neat Colour and Font!!");
-		ThisIsColourAndFont.setBounds(250,80,600,20);
-		panel.add(ThisIsColourAndFont);
+		lbl_ThisIsColourAndFont = new JLabel("Check out this Neat Colour and Font!!");
+		lbl_ThisIsColourAndFont.setBounds(250,80,600,20);
+		pnl_panel.add(lbl_ThisIsColourAndFont);
 		
-		ThisIsAPushButtonLabel = new JLabel("This is a Push Button!!");
-		ThisIsAPushButtonLabel.setBounds(120 ,180,600,20);
-		panel.add(ThisIsAPushButtonLabel);
+		lbl_ThisIsAPushButton = new JLabel("This is a Push Button!!");
+		lbl_ThisIsAPushButton.setBounds(120 ,180,600,20);
+		pnl_panel.add(lbl_ThisIsAPushButton);
 		
-		ThisIsATextFieldLabel = new JLabel("Use this Text Field to Change the Label Below");
-		ThisIsATextFieldLabel.setBounds(80,260,600,20);
-		panel.add(ThisIsATextFieldLabel);
-		ThisIsATextFieldLabel.setVisible(false);
+		lbl_ThisIsATextField = new JLabel("Use this Text Field to Change the Label Below");
+		lbl_ThisIsATextField.setBounds(80,260,600,20);
+		pnl_panel.add(lbl_ThisIsATextField);
+		lbl_ThisIsATextField.setVisible(false);
 		
-		ThisLabelWillChangeLabel = new JLabel("This Label will change!");
-		ThisLabelWillChangeLabel.setBounds(0,340,600,20);
-		panel.add(ThisLabelWillChangeLabel);
-		ThisLabelWillChangeLabel.setHorizontalAlignment(JLabel.CENTER);
-		ThisLabelWillChangeLabel.setVisible(false);
+		lbl_ThisLabelWillChange = new JLabel("This Label will change!");
+		lbl_ThisLabelWillChange.setBounds(0,340,600,20);
+		pnl_panel.add(lbl_ThisLabelWillChange);
+		lbl_ThisLabelWillChange.setHorizontalAlignment(JLabel.CENTER);
+		lbl_ThisLabelWillChange.setVisible(false);
 		
 		//Separators
-		Section1 = new JSeparator();
-		Section1.setBounds(0, 40, 600, 25);
-		panel.add(Section1);
-		Section1.setForeground(DARK_GREY);
+		sep_Title = new JSeparator();
+		sep_Title.setBounds(0, 40, 600, 25);
+		pnl_panel.add(sep_Title);
+		sep_Title.setForeground(DARK_GREY);
 		
-		Section2 = new JSeparator();
-		Section2.setBounds(100, 150, 400, 25);
-		panel.add(Section2);
-		Section2.setForeground(DARK_GREY);
+		sep_Top = new JSeparator();
+		sep_Top.setBounds(100, 150, 400, 25);
+		pnl_panel.add(sep_Top);
+		sep_Top.setForeground(DARK_GREY);
 		
-		Section3 = new JSeparator();
-		Section3.setBounds(100, 220, 400, 25);
-		panel.add(Section3);
-		Section3.setForeground(DARK_GREY);
+		sep_Bottom = new JSeparator();
+		sep_Bottom.setBounds(100, 220, 400, 25);
+		pnl_panel.add(sep_Bottom);
+		sep_Bottom.setForeground(DARK_GREY);
 		
 		//TextFields
-		TextToLabelTextField = new JTextField(20);
-		TextToLabelTextField.setBounds(380, 260, 165, 25);
-		panel.add(TextToLabelTextField);
-		TextToLabelTextField.setVisible(false);
+		txt_TextToLabel= new JTextField(20);
+		txt_TextToLabel.setBounds(380, 260, 165, 25);
+		pnl_panel.add(txt_TextToLabel);
+		txt_TextToLabel.setVisible(false);
 		
 		//Buttons
-		TurnOnButton = new JButton("Turn on");
-		TurnOnButton.setBounds(280, 180, 80, 25);
-		TurnOnButton.setActionCommand(Actions.TURNON.name());
-		TurnOnButton.addActionListener(instance);
-		panel.add(TurnOnButton);
+		btn_TurnOn = new JButton("Turn on");
+		btn_TurnOn.setBounds(280, 180, 80, 25);
+		btn_TurnOn.setActionCommand(Actions.TURNON.name());
+		btn_TurnOn.addActionListener(instance);
+		pnl_panel.add(btn_TurnOn);
 
-		TurnOffButton = new JButton("Turn off");
-		TurnOffButton.setBounds(370, 180, 80, 25);
-		TurnOffButton.setActionCommand(Actions.TURNOFF.name());
-		TurnOffButton.addActionListener(instance);
-		panel.add(TurnOffButton);
+		btn_TurnOff = new JButton("Turn off");
+		btn_TurnOff.setBounds(370, 180, 80, 25);
+		btn_TurnOff.setActionCommand(Actions.TURNOFF.name());
+		btn_TurnOff.addActionListener(instance);
+		pnl_panel.add(btn_TurnOff);
 		
-		TextToLabelButton = new JButton("Text to Label");
-		TextToLabelButton.setBounds(175, 300, 250, 25);
-		TextToLabelButton.setActionCommand(Actions.TEXTTOLABEL.name());
-		TextToLabelButton.addActionListener(instance);
-		panel.add(TextToLabelButton);
-		TextToLabelButton.setVisible(false);
+		btn_TextToLabel = new JButton("Text to Label");
+		btn_TextToLabel.setBounds(175, 300, 250, 25);
+		btn_TextToLabel.setActionCommand(Actions.TEXTTOLABEL.name());
+		btn_TextToLabel.addActionListener(instance);
+		pnl_panel.add(btn_TextToLabel);
+		btn_TextToLabel.setVisible(false);
 		
-		ExitButton = new JButton("Exit");
-		ExitButton.setBounds(10, 10, 80, 25);
-		ExitButton.setActionCommand(Actions.EXIT.name());
-		ExitButton.addActionListener(instance);
-		panel.add(ExitButton);
+		btn_Exit = new JButton("Exit");
+		btn_Exit.setBounds(10, 10, 80, 25);
+		btn_Exit.setActionCommand(Actions.EXIT.name());
+		btn_Exit.addActionListener(instance);
+		pnl_panel.add(btn_Exit);
 		
 		//Frame config
-		frame.setVisible(true);
-		frame.setTitle("Working with GUI");
+		fr_frame.setVisible(true);
+		fr_frame.setTitle("Working with GUI");
 	}
 	
 	public static void main(String[] args) {
@@ -156,31 +173,32 @@ public class GUITutorial1 implements ActionListener {
 		//Button Calculate
 		if (e.getActionCommand() == Actions.TURNON.name())
 		{//Beginning of if
-			TextToLabelTextField.setVisible(true);
-			TextToLabelButton.setVisible(true);
-			ThisLabelWillChangeLabel.setVisible(true);
-			ThisIsATextFieldLabel.setVisible(true);
+			txt_TextToLabel.setVisible(true);
+			btn_TextToLabel.setVisible(true);
+			lbl_ThisLabelWillChange.setVisible(true);
+			lbl_ThisIsATextField.setVisible(true);
 		}//End of if
 		else if (e.getActionCommand() == Actions.TURNOFF.name())
 		{//Beginning of else if
-			TextToLabelTextField.setVisible(false);
-			TextToLabelButton.setVisible(false);
-			ThisLabelWillChangeLabel.setVisible(false);
-			ThisIsATextFieldLabel.setVisible(false);
-			TextToLabelTextField.setText("");
+			txt_TextToLabel.setVisible(false);
+			btn_TextToLabel.setVisible(false);
+			lbl_ThisLabelWillChange.setVisible(false);
+			lbl_ThisIsATextField.setVisible(false);
+			txt_TextToLabel.setText("");
 			TextInTextBox = "This Label will change!";
-			ThisLabelWillChangeLabel.setText(TextInTextBox);
+			lbl_ThisLabelWillChange.setText(TextInTextBox);
 			
 		}//End of else if
 		else if (e.getActionCommand() == Actions.TEXTTOLABEL.name())
 		{//Beginning of else if
-			TextInTextBox = TextToLabelTextField.getText();
-			ThisLabelWillChangeLabel.setText(TextInTextBox);
+			TextInTextBox = txt_TextToLabel.getText();
+			lbl_ThisLabelWillChange.setText(TextInTextBox);
 			
 		}//End of else if
 		else if (e.getActionCommand() == Actions.EXIT.name())
 		{//Beginning of else if
-			frame.dispose();
+			fr_frame.dispose();
+			System.exit(0);
 		}//End of else if
 	}//End of actionPerformed
 }
