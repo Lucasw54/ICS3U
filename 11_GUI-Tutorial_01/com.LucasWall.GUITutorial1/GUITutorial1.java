@@ -7,12 +7,10 @@
  * conventions to create a basic java GUI. The goal of this programe is to 
  */
 package com.LucasWall.GUITutorial1;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,8 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
-public class GUITutorial1 implements ActionListener {
-	
+public class GUITutorial1 implements ActionListener
+{//Beginning of GUITutorial1
 	//---------Gui Globals
 	//Labels
 	private static JPanel pnl_panel;
@@ -47,7 +45,7 @@ public class GUITutorial1 implements ActionListener {
 	private static JButton btn_TextToLabel;
 	private static JButton btn_Exit;
 	
-	//Other Globals
+	//------Other Globals
 	private static String TextInTextBox;
 	
 	//Creating Custom Colours
@@ -62,7 +60,8 @@ public class GUITutorial1 implements ActionListener {
 		EXIT//Dispose's the frame and ends program
 	}//End of Actions
 	
-	public static void GUI() {
+	public static void GUI()
+	{//Beginning of GUI
 		//Creates a new instance variable
 		GUITutorial1 instance = new GUITutorial1();
 		
@@ -160,17 +159,16 @@ public class GUITutorial1 implements ActionListener {
 		//Frame config
 		fr_frame.setVisible(true);
 		fr_frame.setTitle("Working with GUI");
-	}
+	}//End of GUI
 	
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{//Beginning of Main
 		GUI();
-	}
+	}//End of Main
 	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{//Beginning of actionPerformed
-		
-		//Button Calculate
 		if (e.getActionCommand() == Actions.TURNON.name())
 		{//Beginning of if
 			txt_TextToLabel.setVisible(true);
@@ -201,4 +199,4 @@ public class GUITutorial1 implements ActionListener {
 			System.exit(0);
 		}//End of else if
 	}//End of actionPerformed
-}
+}//End of GUITutorial1
