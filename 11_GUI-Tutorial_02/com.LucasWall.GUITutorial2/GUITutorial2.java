@@ -21,7 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSeparator;
 
-public class GUITutorial2 implements ActionListener {
+public class GUITutorial2 implements ActionListener
+{//Beginning of GUITutorial2
 	
 	//----------Gui Globals
 	private static JPanel pnl_panel;
@@ -103,7 +104,8 @@ public class GUITutorial2 implements ActionListener {
 		EXIT////Dispose's the frame and ends the program
 	}//End of Actions
 	
-	public static void CheckComboBox() {
+	public static void CheckComboBox()
+	{//Beginning of CheckComboBox
 		while(Check = true) 
 		{//Beginning of while
 			try {//Beginning of try
@@ -150,8 +152,9 @@ public class GUITutorial2 implements ActionListener {
 				lbl_SizeOrderedComboBox.setVisible(true);
 			}//End of if
 		}//End of while
-	}
-	public static void GUI() {
+	}//End of CheckComboBox
+	public static void GUI()
+	{//Beginning of GUI
 		GUITutorial2 instance = new GUITutorial2();	//Creates a new instance variable
 		String[] optionsToChooseSize = { "Select Size", "Small", "Medium", "Large"};//Creates an array for the size cbo box
 		String[] optionsToChooseAmount = { "Select No.", "1", "2", "3"};//Creates an array for the amount cbo box
@@ -166,7 +169,7 @@ public class GUITutorial2 implements ActionListener {
 		fr_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fr_frame.add(pnl_panel);
 		fr_frame.setSize(600, 600);
-		//frame.setLocationRelativeTo(null);
+		fr_frame.setLocationRelativeTo(null);
 		fr_frame.setBackground(DARK_GREY);
 		
 		//Labels
@@ -328,17 +331,17 @@ public class GUITutorial2 implements ActionListener {
 		fr_frame.setResizable(false);
 		fr_frame.setVisible(true);
 		fr_frame.setTitle("Working with Radios & Combo Boxes");//Creates a title for the frame
-	}
+	}//End of GUI
 	
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{//Beginning of main
 		GUI();
 		CheckComboBox();
-	}
+	}//End of main
 	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{//Beginning of actionPerformed
-		
 		//Button Calculate
 		if (e.getActionCommand() == Actions.ORDERRADIO.name())
 		{//Beginning of if
@@ -380,69 +383,84 @@ public class GUITutorial2 implements ActionListener {
 		else if (e.getActionCommand() == Actions.CHECKSMALL.name())
 		{//Beginning of else if
 			//Logic to determine what version of Small to print
-			if(a == 0) {
-				if (b == 0 && c == 0) {
+			if(a == 0)
+			{//Beginning of if
+				if (b == 0 && c == 0)
+				{//Beginning of if
 					CheckBoxSize1 = "Small";
 					a += 1;
-				}
-				else if (b == 1 || c == 1) {
+				}//End of if
+				else if (b == 1 || c == 1)
+				{//Beginning of else if
 					CheckBoxSize1 = "Small, ";
 					a += 1;
-				}
-			}
-			else if(a == 1) {
+				}//End of else if
+			}//End of if
+			else if(a == 1)
+			{//Beginning of if
 				CheckBoxSize1 = "";
 				a -= 1;
-			}
+			}//End of if
 			btn_OrderCheckBox.setEnabled(true);
 		}//End of else if
 		else if (e.getActionCommand() == Actions.CHECKMEDIUM.name())
 		{///Beginning of else if
 			//Logic to determine what version of Medium to print
-			if(b == 0) {
-				if (a == 0 && b == 0 && c == 0) {
+			if(b == 0)
+			{//Beginning of if
+				if (a == 0 && b == 0 && c == 0)
+				{//Beginning of if
 					CheckBoxSize2 = "Medium";
 					b += 1;
-				}
-				else if (a == 1) {
+				}//End of if
+				else if (a == 1)
+				{//Beginning of else if
 					CheckBoxSize2 = ", Medium";
 					b += 1;
-				}
-				else if (c == 1 && a == 1) {
+				}//End of else if
+				else if (c == 1 && a == 1)
+				{//Beginnin of else if
 					CheckBoxSize2 = ", Medium ";
 					b += 1;
-				}
-				else if (c == 1) {
+				}//End of else if
+				else if (c == 1)
+				{//Beginning of else if
 					CheckBoxSize2 = "Medium, ";
 					b += 1;
-				}
-			}
-			else if(b == 1) {
+				}//End of else if
+			}//End of if
+			else if(b == 1)
+			{//Beginning of else if
 				CheckBoxSize2 = "";
 				b -= 1;
-			}
+			}//End of else if
 			btn_OrderCheckBox.setEnabled(true);
 		}//End of else if
 		else if (e.getActionCommand() == Actions.CHECKLARGE.name())
 		{//Beginning of else if
 			//Logic to determine what version of Large to print
-			if(c == 0) {
-				if (b == 0) {
+			if(c == 0)
+			{//Beginning of if
+				if (b == 0)
+				{//Beginning of if
 					CheckBoxSize3 = "Large";
 					c += 1;
-				}
-				else if (b == 1) {
+				}//End of if
+				else if (b == 1)
+				{//Beginning of else if
 					CheckBoxSize3 = ", Large";
 					c += 1;
-				}
-			}
-			else if(c == 1) {
+				}//End of else if
+			}//End of if
+			else if(c == 1)
+			{//Beginning of else if
 				CheckBoxSize3 = "";
 				c -= 1;
-			}
-			if(a == 1) {
+			}//End of else if
+			if(a == 1)
+			{//Beginning of if
 				CheckBoxSize3 = ", and Large";
-			}
+			}//End of if
 			btn_OrderCheckBox.setEnabled(true);
 		}//End of else if
 		else if (e.getActionCommand() == Actions.ORDERCHECKBOX.name())
@@ -495,4 +513,4 @@ public class GUITutorial2 implements ActionListener {
 			System.exit(0);
 		}//End of else if
 	}//End of actionPerformed
-}
+}//End of GUITutorial2
