@@ -108,7 +108,8 @@ public class GUITutorial2 implements ActionListener
 	{//Beginning of CheckComboBox
 		while(Check = true) 
 		{//Beginning of while
-			try {//Beginning of try
+			try
+			{//Beginning of try
 				//Make invisble while waiting for input
 				Thread.sleep(25);
 			}//End of try
