@@ -1,4 +1,3 @@
-/*
  * Name:Lucas Wall
  * Class code: ICS3U 
  * Date:Friday, March 28, 2022 
@@ -58,13 +57,12 @@ public class GUITutorial1 implements ActionListener
 		TURNON, //Action to turn on the text to label maker
 		TURNOFF, //Action to turn off the text to label maker
 		TEXTTOLABEL, //Action which sets 'lbl_ThisLabelWillChange' to whatever is in the 'txt_TextToLabel'
-		EXIT//Dispose's the frame and ends program
+		EXIT//Dispose's the frame and ends the program
 	}//End of Actions
 	
 	public static void GUI()
 	{//Beginning of GUI
-		//Creates a new instance variable
-		GUITutorial1 instance = new GUITutorial1();
+		GUITutorial1 instance = new GUITutorial1();	//Creates a new instance variable
 		
 		//Panel Config
 		pnl_panel = new JPanel();
@@ -158,8 +156,9 @@ public class GUITutorial1 implements ActionListener
 		pnl_panel.add(btn_Exit);
 		
 		//Frame config
+		fr_frame.setResizable(false);
 		fr_frame.setVisible(true);
-		fr_frame.setTitle("Working with GUI");
+		fr_frame.setTitle("Working with GUI");//Creates a title for the frame
 	}//End of GUI
 	
 	public static void main(String[] args)
@@ -186,13 +185,11 @@ public class GUITutorial1 implements ActionListener
 			txt_TextToLabel.setText("");
 			TextInTextBox = "This Label will change!";
 			lbl_ThisLabelWillChange.setText(TextInTextBox);
-			
 		}//End of else if
 		else if (e.getActionCommand() == Actions.TEXTTOLABEL.name())
 		{//Beginning of else if
 			TextInTextBox = txt_TextToLabel.getText();
 			lbl_ThisLabelWillChange.setText(TextInTextBox);
-			
 		}//End of else if
 		else if (e.getActionCommand() == Actions.EXIT.name())
 		{//Beginning of else if
