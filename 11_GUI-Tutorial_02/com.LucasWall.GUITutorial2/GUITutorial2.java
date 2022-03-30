@@ -353,7 +353,6 @@ public class GUITutorial2 implements ActionListener
 			rad_Medium.setEnabled(false);
 			rad_Large.setEnabled(false);
 			rad_SmallOnClick.setEnabled(false);
-			
 		}//End of else if
 		else if (e.getActionCommand() == Actions.RADIOSMALL.name())
 		{//Beginning of else if
