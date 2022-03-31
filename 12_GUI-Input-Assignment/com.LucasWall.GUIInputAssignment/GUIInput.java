@@ -26,138 +26,132 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
-public class GUIInput implements ActionListener {
-	
+public class GUIInput implements ActionListener
+{//Beginning of GUIInput
 	//------Gui Globals
 	private static JPanel pnl_panel;
 	private static JFrame fr_frame;
 	
-	//lbl
+	//Labels
 	private static JLabel lbl_TitleLabel;
 	private static JLabel lbl_Slogan;
 	private static JLabel lbl_YrName;
-	private static JLabel lbl_NumOrdered;
-	private static JLabel lbl_ThisIsAPushButtonLabel;
 	private static JLabel lbl_GeneralInfo;
 	private static JLabel lbl_PhotoCorrectionOptions;
-	private static JLabel lbl_YouOrderedA1;
 	private static JLabel lbl_NumPrints;
 	private static JLabel lbl_Dimensions;
 	private static JLabel lbl_ProvinceCountry;
-	private static JLabel lbl_RedEye;
-	private static JLabel lbl_OverExposure;
-	private static JLabel lbl_ColourCorrection;
-	private static JLabel lbl_BlemishRetouching;
 	private static JLabel lbl_ThankYou;
-	//txt
-	private static JTextField txt_Name;
-	private static JTextField txt_NumPrints;
-	private static JTextField txt_Address;
 	
-	//img
-	private static JLabel img_LadyBug;
-	private static JLabel img_Flag;
-	
-	//sep
+	//Separators
 	private static JSeparator sep_Title;
 	private static JSeparator sep_Horizontal;
 	private static JSeparator sep_GeneralInfo;
 	private static JSeparator sep_PhotoCorrection;
 	
-	//rad
+	//TextFields
+	private static JTextField txt_Name;
+	private static JTextField txt_NumPrints;
+	private static JTextField txt_Address;
+	
+	//Images - (Labels)
+	private static JLabel img_LadyBug;
+	private static JLabel img_Flag;
+	
+	//Radio Buttons
 	private static JRadioButton rad_Pickup;
 	private static JRadioButton rad_Deliver;
 	
-	//cbo
+	//Combo Boxes
 	private static JComboBox<String> cbo_SelectSizeComboBox;
 	private static JComboBox<String> cbo_ChooseCity;
-	private static JComboBox<String> cbo_ChooseProvince;
 	
-	//chk_
-	private static JCheckBox checkBox1;
-	private static JCheckBox checkBox2;
-	private static JCheckBox checkBox3;
-	private static JCheckBox checkBox4;
-	private static JCheckBox checkBox5;
-	private static JCheckBox checkBox6;
-	private static JCheckBox checkBox7;
-	private static JCheckBox checkBox8;
+	//Check Boxes
+	private static JCheckBox chk_RedEye;
+	private static JCheckBox chk_OverExposure;
+	private static JCheckBox chk_ColourCorrection;
+	private static JCheckBox chk_BlemishReTouching;
+	private static JCheckBox chk_PeopleRemover;
+	private static JCheckBox chk_SkinCare;
+	private static JCheckBox chk_SharpenImage;
+	private static JCheckBox chk_AddBlur;
 	
-	//btn
-	private static JButton TurnOffButton;
-	private static JButton ExitButton;
-	private static JButton OrderAgain;
+	//Buttons
+	private static JButton btn_TurnOff;
+	private static JButton btn_OrderAgain;
 	private static JButton btn_Reset;
+	private static JButton btn_Exit;
 	
-	//--------Other Globals
-	private static double a = 0;
-	private static double b = 0;
-	private static double c = 0;
-	private static Boolean Check = true;
-	private static ButtonGroup bg;
-	private static String ReceiptName = "";
-	private static Boolean Red_Eye = false;
-	private static Boolean Over_Exposure = false;
-	private static Boolean Colour_Correction = false;
-	private static Boolean Blemish_Re_Touching = false;
-	private static Boolean People_Remover = false;
-	private static Boolean Skin_Care = false;
-	private static Boolean Sharpen_Image = false;
-	private static Boolean Add_Blur = false;
+	//--------Other Globals 
+	private static ButtonGroup bg_PickupDeliver;
+	private static String str_ReceiptName = "";
+	private static Boolean bool_Red_Eye = false;
+	private static Boolean bool_Over_Exposure = false;
+	private static Boolean bool_Colour_Correction = false;
+	private static Boolean bool_Blemish_Re_Touching = false;
+	private static Boolean bool_People_Remover = false;
+	private static Boolean bool_Skin_Care = false;
+	private static Boolean bool_Sharpen_Image = false;
+	private static Boolean bool_Add_Blur = false;
+	private static String str_Dimensions = "Unselected";
+	private static String str_DimensionsReceipt = "";
+	private static String str_prints = "";
+	private static double dbl_PhotoCorrectionPrice = 5;
+	private static double dbl_Subtotal = 0;
+	private static double dbl_printsInt = 0;
+	private static double dbl_PrintsPrice = 0;
+	private static double dbl_DimensionsPrice = 0;
+	private static double dbl_Total = 0;
+	private static double dbl_Tax_total = 0;
+	private static BufferedImage BufferedLadyBug;
+	private static BufferedImage BufferedFlag;
+	private static Image ImageLadyBug;
+	private static Image ImageFlag;
+	private static ImageIcon icn_LadyBug;
+	private static ImageIcon icn_Flag;
 	
 	//------New Colours
 	public static final Color NEW_BLUE = new Color(147, 196, 180);
 	public static final Color DARK_GREY = new Color(102,102,102);
 	public static final Color WRONG_RED = new Color(251, 255, 250);
 	
+	//------Constant Variables
+	public static final double dbl_HST_TAX  = 1.13;
+	
 	//------Decimal Formats
+	public static DecimalFormat money = new DecimalFormat("$###,###,##0.00");
 	public static DecimalFormat number = new DecimalFormat("###,###,###");
 	
 	//------Borders
 	public static Border FrameBorder = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 	public static Border ButtonBorder = BorderFactory.createCompoundBorder();
-	//List of all actions
+	
 	public enum Actions
 	{//Beginning of Actions
 		RADIOPICKUP,
 		RADIODELIVER,
-		REDEYE,
-		OVER_EXPOSURE,
-		COLOUR_CORRECTION,
-		BLEMISH_RE_TOUCHING,
-		PEOPLE_REMOVER,
-		SKIN_CARE,
-		SHARPEN_IMAGE,
-		ADD_BLUR,
-		ORDER1,
-		ORDERAGAIN,
-		RESET,
-		EXIT
+		
+		REDEYE,//Action that sets RedEye to true so that the receipt know to print it out
+		OVER_EXPOSURE,//Action that sets Over Exposure to true so that the receipt know to print it out
+		COLOUR_CORRECTION,//Action that sets Colour Correction to true so that the receipt know to print it out
+		BLEMISH_RE_TOUCHING,//Action that sets Blemish Re-Touching to true so that the receipt know to print it out
+		PEOPLE_REMOVER,//Action that sets People Remover to true so that the receipt know to print it out
+		SKIN_CARE,//Action that sets Skin Care to true so that the receipt know to print it out
+		SHARPEN_IMAGE,//Action that sets Sharpen Image to true so that the receipt know to print it out
+		ADD_BLUR,//Action that sets Add Blur to true so that the receipt know to print it out
+		
+		ORDER,//Action that sets RedEye to true so that the receipt know to print it out
+		ORDERAGAIN,//Action that sets RedEye to true so that the receipt know to print it out
+		
+		RESET,//Action that resets the GUI elements so that they are enabled again.
+		EXIT//Dispose's the frame and ends the program
 	}//End of Actions
-	
-	public static void CheckComboBox()
-	{
-		while(Check = true) 
-		{//Beginning of while
-			try
-			{//Beginning of try
-				//Make invisble while loading
-				Thread.sleep(25);
-			}
-
-			catch (InterruptedException e) 
-			{//Beginning of catch
-				e.printStackTrace();
-			}//End of catch
-		}
-	}
 	public static void GUI() {
 		GUIInput instance = new GUIInput();
-		String[] optionsToChoose = { "Choose Dimensions", "4x6", "6x8", "8x10", "12x17"};
+		String[] optionsToChoose = { "Choose Dimensions", "$5 | 4x6", "$7 | 6x8", "$10 | 8x10", "$15 | 12x17"};
 		String[] optionsToChoose2 = { "Choose City", "Barrie", "Belleville", "Cambridge", "Guelph", "Hamilton", "Kingston", "Kitchener",
 				"London", "Markham", "Orillia", "Oshawa", "Ottawa", "Peterborough", "Pickering", "Richmond Hill",
 				"Thunder Bay", "Timmins", "Toronto", "Vaughan", "Waterloo", "Welland", "Windsor" };
-		
 		//Panel Config
 		pnl_panel = new JPanel();
 		pnl_panel.setBackground(NEW_BLUE);
@@ -172,23 +166,28 @@ public class GUIInput implements ActionListener {
 		//frame.setLocationRelativeTo(null);
 		fr_frame.setBackground(DARK_GREY);	
 		
-		//Images
-		BufferedImage img1 = null;
-		BufferedImage img2 = null;
-		try {
-			img1 = ImageIO.read(new File("LB.png"));
-			img2 = ImageIO.read(new File("Flag.png"));
-		} catch (IOException e) {
+		//----All Things Images
+		BufferedLadyBug = null;
+		BufferedFlag = null;
+		try
+		{//Beginning of try
+			BufferedLadyBug = ImageIO.read(new File("LB.png"));
+			BufferedFlag = ImageIO.read(new File("Flag.png"));
+		}//End of try
+		catch (IOException e)
+		{//Beginning of catch
 		    e.printStackTrace();
-		}
+		}//End of catch
+		//Creates Scaled Instances of Images
+		ImageLadyBug = BufferedLadyBug.getScaledInstance(60, 45, 100);
+		ImageFlag = BufferedFlag.getScaledInstance(80, 45, 100);
 		
-		Image dimg = img1.getScaledInstance(60, 45, 100);
-		Image eimg = img2.getScaledInstance(80, 45, 100);
+		//Creates image icons
+		icn_LadyBug = new ImageIcon(ImageLadyBug);
+		icn_Flag = new ImageIcon(ImageFlag);
 		
-		//Creating image icons
-		ImageIcon icn_LadyBug = new ImageIcon(dimg);
-		ImageIcon icn_Flag = new ImageIcon(eimg);
-		
+		//-----------Creating GUI Objects
+		//Images(Labels)
 		img_LadyBug = new JLabel(icn_LadyBug);
 		img_LadyBug.setBounds(750,20,60,45);
 		pnl_panel.add(img_LadyBug);
@@ -215,17 +214,10 @@ public class GUIInput implements ActionListener {
 		pnl_panel.add(lbl_YrName);
 		lbl_YrName.setFont(new Font("Times New Roman", Font.PLAIN, 22));
 		
-		lbl_NumPrints = new JLabel("How many prints would you like?");
-		lbl_NumPrints.setBounds(50, 210, 400, 25);
+		lbl_NumPrints = new JLabel("How many prints would you like? (50 Cents Each)");
+		lbl_NumPrints.setBounds(50, 210, 500, 25);
 		pnl_panel.add(lbl_NumPrints);
 		lbl_NumPrints.setFont(new Font("Times New Roman", Font.PLAIN, 22));
-		
-		lbl_NumOrdered = new JLabel("");
-		lbl_NumOrdered.setBounds(350, 290, 200, 25);
-		pnl_panel.add(lbl_NumOrdered);
-		lbl_NumOrdered.setVisible(false);
-		lbl_NumOrdered.setForeground(WRONG_RED);
-		lbl_NumOrdered.setFont(new Font("Serif", Font.BOLD, 18));
 		
 		lbl_Dimensions = new JLabel("Choose dimensions for this order: ");
 		lbl_Dimensions.setBounds(50, 270, 340, 25);
@@ -244,8 +236,8 @@ public class GUIInput implements ActionListener {
 		lbl_GeneralInfo.setFont(new Font("Serif", Font.BOLD, 24));
 		lbl_GeneralInfo.setHorizontalAlignment(JLabel.CENTER);
 		
-		lbl_PhotoCorrectionOptions = new JLabel("Photo Correction Options ");
-		lbl_PhotoCorrectionOptions.setBounds(576,105,576,30);
+		lbl_PhotoCorrectionOptions = new JLabel("Photo Correction Options (+5$ Each)");
+		lbl_PhotoCorrectionOptions.setBounds(570,105,576,30);
 		pnl_panel.add(lbl_PhotoCorrectionOptions);
 		lbl_PhotoCorrectionOptions.setFont(new Font("Serif", Font.BOLD, 24));
 		lbl_PhotoCorrectionOptions.setHorizontalAlignment(JLabel.CENTER);
@@ -292,9 +284,9 @@ public class GUIInput implements ActionListener {
 		rad_Deliver.addActionListener(instance);
 		pnl_panel.add(rad_Deliver);
 		
-		bg = new ButtonGroup();    
-		bg.add(rad_Pickup);
-		bg.add(rad_Deliver);
+		bg_PickupDeliver = new ButtonGroup();    
+		bg_PickupDeliver.add(rad_Pickup);//adds Radio Button rad_Pickup to Button Group
+		bg_PickupDeliver.add(rad_Deliver);//adds Radio Button rad_Deliver to Button Group
 		
 		//Text Fields
 		txt_Name = new JTextField(20);
@@ -302,7 +294,7 @@ public class GUIInput implements ActionListener {
 		pnl_panel.add(txt_Name);
 		
 		txt_NumPrints = new JTextField(20);
-		txt_NumPrints.setBounds(400,210,100,30);
+		txt_NumPrints.setBounds(540,210,50,30);
 		pnl_panel.add(txt_NumPrints);
 		
 		txt_Address = new JTextField(20);
@@ -319,69 +311,69 @@ public class GUIInput implements ActionListener {
 		cbo_ChooseCity.setBounds(50, 380, 180, 20);
 		pnl_panel.add(cbo_ChooseCity);
 		cbo_ChooseCity.setVisible(false);
-		
+	
 		//Check Boxes
-		checkBox1 = new JCheckBox("Red Eye");  
-        checkBox1.setBounds(650,140, 200,50); 
-        checkBox1.setActionCommand(Actions.REDEYE.name());
-        checkBox1.addActionListener(instance);
-        pnl_panel.add(checkBox1); 
+		chk_RedEye = new JCheckBox("Red Eye");  
+		chk_RedEye.setBounds(650,140, 200,50); 
+		chk_RedEye.setActionCommand(Actions.REDEYE.name());
+		chk_RedEye.addActionListener(instance);
+        pnl_panel.add(chk_RedEye); 
         
-        checkBox2 = new JCheckBox("Over Exposure");  
-        checkBox2.setBounds(650,190, 200,50);  
-        checkBox2.setActionCommand(Actions.OVER_EXPOSURE.name());
-        checkBox2.addActionListener(instance);
-        pnl_panel.add(checkBox2); 
+        chk_OverExposure = new JCheckBox("Over Exposure");  
+        chk_OverExposure.setBounds(650,190, 200,50);  
+        chk_OverExposure.setActionCommand(Actions.OVER_EXPOSURE.name());
+        chk_OverExposure.addActionListener(instance);
+        pnl_panel.add(chk_OverExposure); 
         
-        checkBox3 = new JCheckBox("Colour Correction");  
-        checkBox3.setBounds(650,240, 200,50);  
-        checkBox3.setActionCommand(Actions.COLOUR_CORRECTION.name());
-        checkBox3.addActionListener(instance);
-        pnl_panel.add(checkBox3);  
+        chk_ColourCorrection = new JCheckBox("Colour Correction");  
+        chk_ColourCorrection.setBounds(650,240, 200,50);  
+        chk_ColourCorrection.setActionCommand(Actions.COLOUR_CORRECTION.name());
+        chk_ColourCorrection.addActionListener(instance);
+        pnl_panel.add(chk_ColourCorrection);  
         
-        checkBox4 = new JCheckBox("Blemish Re-Touching");  
-        checkBox4.setBounds(650,290, 200,50);  
-        checkBox4.setActionCommand(Actions.BLEMISH_RE_TOUCHING.name());
-        checkBox4.addActionListener(instance);
-        pnl_panel.add(checkBox4);  
+        chk_BlemishReTouching = new JCheckBox("Blemish Re-Touching");  
+        chk_BlemishReTouching.setBounds(650,290, 200,50);  
+        chk_BlemishReTouching.setActionCommand(Actions.BLEMISH_RE_TOUCHING.name());
+        chk_BlemishReTouching.addActionListener(instance);
+        pnl_panel.add(chk_BlemishReTouching);  
         
-        checkBox5 = new JCheckBox("People Remover");  
-        checkBox5.setBounds(900,140, 200,50);  
-        checkBox5.setActionCommand(Actions.PEOPLE_REMOVER.name());
-        checkBox5.addActionListener(instance);
-        pnl_panel.add(checkBox5); 
+        chk_PeopleRemover = new JCheckBox("People Remover");  
+        chk_PeopleRemover.setBounds(900,140, 200,50);  
+        chk_PeopleRemover.setActionCommand(Actions.PEOPLE_REMOVER.name());
+        chk_PeopleRemover.addActionListener(instance);
+        pnl_panel.add(chk_PeopleRemover); 
         
-        checkBox6 = new JCheckBox("Skin Care");  
-        checkBox6.setBounds(900,190, 200,50);  
-        checkBox6.setActionCommand(Actions.SKIN_CARE.name());
-        checkBox6.addActionListener(instance);
-        pnl_panel.add(checkBox6); 
+        chk_SkinCare = new JCheckBox("Skin Care");  
+        chk_SkinCare.setBounds(900,190, 200,50);  
+        chk_SkinCare.setActionCommand(Actions.SKIN_CARE.name());
+        chk_SkinCare.addActionListener(instance);
+        pnl_panel.add(chk_SkinCare); 
         
-        checkBox7 = new JCheckBox("Sharpen Image");  
-        checkBox7.setBounds(900,240, 200,50);   
-        checkBox7.setActionCommand(Actions.SHARPEN_IMAGE.name());
-        checkBox7.addActionListener(instance);
-        pnl_panel.add(checkBox7);  
+        chk_SharpenImage = new JCheckBox("Sharpen Image");  
+        chk_SharpenImage.setBounds(900,240, 200,50);   
+        chk_SharpenImage.setActionCommand(Actions.SHARPEN_IMAGE.name());
+        chk_SharpenImage.addActionListener(instance);
+        pnl_panel.add(chk_SharpenImage);  
         
-        checkBox8 = new JCheckBox("Add Blur");  
-        checkBox8.setBounds(900,290, 250,50);  
-        checkBox8.setActionCommand(Actions.ADD_BLUR.name());
-        checkBox8.addActionListener(instance);
-        pnl_panel.add(checkBox8);
+        chk_AddBlur = new JCheckBox("Add Blur");  
+        chk_AddBlur.setBounds(900,290, 250,50);  
+        chk_AddBlur.setActionCommand(Actions.ADD_BLUR.name());
+        chk_AddBlur.addActionListener(instance);
+        pnl_panel.add(chk_AddBlur);
         
 		//Buttons
-		TurnOffButton = new JButton("Place Order");
-		TurnOffButton.setBounds(176, 550, 800, 75);
-		TurnOffButton.setActionCommand(Actions.ORDER1.name());
-		TurnOffButton.addActionListener(instance);
-		pnl_panel.add(TurnOffButton);
+        btn_TurnOff = new JButton("Place Order");
+        btn_TurnOff.setBounds(176, 550, 800, 75);
+        btn_TurnOff.setActionCommand(Actions.ORDER.name());
+        btn_TurnOff.addActionListener(instance);
+		pnl_panel.add(btn_TurnOff);
 		
-		OrderAgain = new JButton("Order Again");
-		OrderAgain.setBounds(476, 350, 200, 25);
-		OrderAgain.setActionCommand(Actions.ORDERAGAIN.name());
-		OrderAgain.addActionListener(instance);
-		pnl_panel.add(OrderAgain);
-		OrderAgain.setVisible(false);
+		btn_OrderAgain = new JButton("Order Again");
+		btn_OrderAgain.setBounds(476, 350, 200, 25);
+		btn_OrderAgain.setActionCommand(Actions.ORDERAGAIN.name());
+		btn_OrderAgain.addActionListener(instance);
+		pnl_panel.add(btn_OrderAgain);
+		btn_OrderAgain.setVisible(false);
 		
 		btn_Reset = new JButton("Reset");
 		btn_Reset.setBounds(100, 25, 80, 25);
@@ -389,181 +381,227 @@ public class GUIInput implements ActionListener {
 		btn_Reset.addActionListener(instance);
 		pnl_panel.add(btn_Reset);
 		
-		ExitButton = new JButton("Exit");
-		ExitButton.setBounds(20, 25, 80, 25);
-		ExitButton.setActionCommand(Actions.EXIT.name());
-		ExitButton.addActionListener(instance);
-		pnl_panel.add(ExitButton);
+		btn_Exit = new JButton("Exit");
+		btn_Exit.setBounds(20, 25, 80, 25);
+		btn_Exit.setActionCommand(Actions.EXIT.name());
+		btn_Exit.addActionListener(instance);
+		pnl_panel.add(btn_Exit);
 		
 		//Frame config
 		fr_frame.setResizable(false);
 		fr_frame.setVisible(true);
-		fr_frame.setTitle("Working with Radios & Combo Boxes");
-	}
+		fr_frame.setTitle("Working with Radios & Combo Boxes");//Creates a title for the frame
+	}//End of GUI
 	
-	public static void ThankYou()
-	{
-		lbl_YrName.setVisible(false);
-		lbl_NumPrints.setVisible(false);
-		lbl_NumOrdered.setVisible(false);
-		lbl_Dimensions.setVisible(false);
-		lbl_GeneralInfo.setVisible(false);
-		lbl_PhotoCorrectionOptions.setVisible(false);
-		lbl_ProvinceCountry.setVisible(false);
-		lbl_ThankYou.setVisible(false);
-		sep_Horizontal.setVisible(false);
-		sep_GeneralInfo.setVisible(false);
-		sep_PhotoCorrection.setVisible(false);
-		txt_Name.setVisible(false);
-		txt_NumPrints.setVisible(false);
-		txt_Address.setVisible(false);
-		rad_Pickup.setVisible(false);
-		rad_Deliver.setVisible(false);
-		cbo_SelectSizeComboBox.setVisible(false);
-		cbo_ChooseCity.setVisible(false);
-		lbl_ThankYou.setVisible(false);
-		OrderAgain.setVisible(false);
-		lbl_ThankYou.setVisible(false);
-		OrderAgain.setVisible(false);
-		lbl_ThankYou.setVisible(false);
-		OrderAgain.setVisible(false);
-		checkBox1.setVisible(false);
-		checkBox2.setVisible(false);
-		checkBox3.setVisible(false);
-		checkBox4.setVisible(false);
-		checkBox5.setVisible(false);
-		checkBox6.setVisible(false);
-		checkBox7.setVisible(false);
-		checkBox8.setVisible(false);
-		TurnOffButton.setVisible(false);		
-	
-		lbl_ThankYou.setVisible(true);
-		OrderAgain.setVisible(true);
-		ReceiptName = txt_Name.getText();
-		System.out.println(" ----------Receipt-------------------------------------------------------------");
-		System.out.println("|\t\t\t\t   Shutter Bugs" +"\t\t\t\t       |");
-		System.out.print("|\t\t\t\t Peterborough, ON\t\t\t       |\n");
-		System.out.print("|\t\t\t\t   705-555-3722\t\t\t               |\n");
-		System.out.print("|\t\t\t   *** You Pic it we Print it*** \t\t       |\n");
-		System.out.print("|   ________________________________________________________________________   |\n");
-		System.out.print("|\t\t\t\t\t\t\t\t\t       |\n");
-		System.out.print("|\t\t\t    Here is your order: " + ReceiptName + "\t\t\t       |" + "\n");
-		System.out.print("|Items:\t\t\t\t\t\t\t\t\t       |\n");
-		System.out.print("|\t\t\t\t\t\t\t\t\t       |\n");
-		//System.out.print("|" + "" + money.format(SubSubtotal) + " " + "\t\t\t\t\t\t       |" + "\n");
-		
-		//Red_Eye;
-		//private static Boolean Over_Exposure;
-		//private static Boolean Colour_Correction;
-		//private static Boolean Blemish_Re_Touching;
-		//private static Boolean People_Remover;
-		//private static Boolean Skin_Care;
-		//private static Boolean Sharpen_Image;
-		//private static Boolean Add_Blur;
-		if (Red_Eye == true) 
-		{
-			System.out.print("|" + "Red Eye" + "\t"  + "\t\t\t\t\t\t\t       |" + "\n");
-		}
-		if (Over_Exposure == true) 
-		{
-			System.out.print("|" + "Colour Correction" + "\t"  + "\t\t\t\t\t\t\t       |" + "\n");
-		}
-		if (Colour_Correction == true) 
-		{
-			System.out.print("|" + "Blemish Re-Touching" + "\t"  + "\t\t\t\t\t\t\t       |" + "\n");
-		}
-		if (Blemish_Re_Touching == true) 
-		{
-			System.out.print("|" + "People Remover" + "\t"  + "\t\t\t\t\t\t\t       |" + "\n");
-		}
-		if (People_Remover == true)
-		{
-			System.out.print("|" + "Skin Care" + "\t"  + "\t\t\t\t\t\t\t       |" + "\n");
-		}
-		if (Skin_Care == true)
-		{
-			System.out.print("|" + "Sharpen Image" + "\t"  + "\t\t\t\t\t\t\t       |" + "\n");
-		}
-		if (Sharpen_Image == true)
-		{
-			System.out.print("|" + "Add Blur" + "\t"  + "\t\t\t\t\t\t\t       |" + "\n");
-		}
-		if (Add_Blur == true)
-		{
-			System.out.print("|" + "Red Eye" + "\t"  + "\t\t\t\t\t\t\t       |" + "\n");
-		}
-		
-	//	System.out.print("|" + "+HST:" + " " + money.format(Tax_total) + "\t\t\t\t\t\t\t\t       |" + "\n");
-	//	System.out.print("|" + "+Tip (15%):" + " " + money.format(Tip_total) + "\t\t\t\t\t\t\t       |" + "\n");
-	//	System.out.print("|" + "Your total price is:" + " " + money.format(Total) + "\t\t\t\t\t\t       |" + "\n");
-		System.out.print("|\t\t\t\t\t\t\t\t\t       |\n");
-		System.out.print("|\t\t     Thank you for printing with Shutter Bugs" +"\t\t       |\n");
-		System.out.print("|\t\t\t\t\t\t\t\t\t       |\n");
-		System.out.println(" ------------------------------------------------------------------------------");
-	}
-	public static void OrderAgain() {
-		lbl_YrName.setVisible(true);
-		lbl_NumPrints.setVisible(true);
-		lbl_NumOrdered.setVisible(true);
-		lbl_Dimensions.setVisible(true);
-		lbl_GeneralInfo.setVisible(true);
-		lbl_PhotoCorrectionOptions.setVisible(true);
-		lbl_ThankYou.setVisible(true);
-		sep_Horizontal.setVisible(true);
-		sep_GeneralInfo.setVisible(true);
-		sep_PhotoCorrection.setVisible(true);
-		txt_Name.setVisible(true);
-		txt_NumPrints.setVisible(true);
-		rad_Pickup.setVisible(true);
-		rad_Deliver.setVisible(true);
-		cbo_SelectSizeComboBox.setVisible(true);
-		OrderAgain.setVisible(true);
-		checkBox1.setVisible(true);
-		checkBox2.setVisible(true);
-		checkBox3.setVisible(true);
-		checkBox4.setVisible(true);
-		checkBox5.setVisible(true);
-		checkBox6.setVisible(true);
-		checkBox7.setVisible(true);
-		checkBox8.setVisible(true);
-		TurnOffButton.setVisible(true);		
-		
-		txt_Name.setText("");
-		txt_NumPrints.setText("");
-		txt_Address.setText("");
-		checkBox1.setSelected(false);
-		checkBox2.setSelected(false);
-		checkBox3.setSelected(false);
-		checkBox4.setSelected(false);
-		checkBox5.setSelected(false);
-		checkBox6.setSelected(false);
-		checkBox7.setSelected(false);
-		checkBox8.setSelected(false);
-		
-		lbl_ThankYou.setVisible(false);
-		OrderAgain.setVisible(false);
-		
-		cbo_SelectSizeComboBox.setSelectedIndex(0);
-		cbo_ChooseCity.setSelectedIndex(0);
-		bg.clearSelection();
-	}
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{//Beginning of main
 		GUI();
-		CheckComboBox();
-	}
+	}//End of main
 	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{//Beginning of actionPerformed
-		
-		//Button Calculate
-		if (e.getActionCommand() == Actions.ORDER1.name())
+		if (e.getActionCommand() == Actions.ORDER.name())
 		{//Beginning of if
-			ThankYou();
+			//Changes order Objects to not visible
+			lbl_YrName.setVisible(false);
+			lbl_NumPrints.setVisible(false);
+			lbl_Dimensions.setVisible(false);
+			lbl_GeneralInfo.setVisible(false);
+			lbl_PhotoCorrectionOptions.setVisible(false);
+			lbl_ProvinceCountry.setVisible(false);
+			lbl_ThankYou.setVisible(false);
+			sep_Horizontal.setVisible(false);
+			sep_GeneralInfo.setVisible(false);
+			sep_PhotoCorrection.setVisible(false);
+			txt_Name.setVisible(false);
+			txt_NumPrints.setVisible(false);
+			txt_Address.setVisible(false);
+			rad_Pickup.setVisible(false);
+			rad_Deliver.setVisible(false);
+			cbo_SelectSizeComboBox.setVisible(false);
+			cbo_ChooseCity.setVisible(false);
+			lbl_ThankYou.setVisible(false);
+			btn_OrderAgain.setVisible(false);
+			lbl_ThankYou.setVisible(false);
+			btn_OrderAgain.setVisible(false);
+			lbl_ThankYou.setVisible(false);
+			btn_OrderAgain.setVisible(false);
+			chk_RedEye.setVisible(false);
+			chk_OverExposure.setVisible(false);
+			chk_ColourCorrection.setVisible(false);
+			chk_BlemishReTouching.setVisible(false);
+			chk_PeopleRemover.setVisible(false);
+			chk_SkinCare.setVisible(false);
+			chk_SharpenImage.setVisible(false);
+			chk_AddBlur.setVisible(false);
+			btn_TurnOff.setVisible(false);		
+			
+			//Shows the Thank you Objects
+			lbl_ThankYou.setVisible(true);
+			btn_OrderAgain.setVisible(true);
+			
+			//-------Receipt logic
+			str_ReceiptName = txt_Name.getText();
+			str_Dimensions = (String) cbo_SelectSizeComboBox.getSelectedItem();
+			str_prints = txt_NumPrints.getText();
+			dbl_printsInt = Integer.parseInt(str_prints);
+			dbl_Subtotal += dbl_printsInt * 0.50;
+			dbl_PrintsPrice = dbl_printsInt * 0.50;
+			dbl_DimensionsPrice = 0;
+			if(str_Dimensions.equals("$5 | 4x6"))
+			{//Beginning of if
+				str_DimensionsReceipt = "4x6";
+				dbl_Subtotal += 5;
+				dbl_DimensionsPrice = 5;
+			}//End of if
+			else if(str_Dimensions.equals("$7 | 6x8"))
+			{//Beginning of else if
+				str_DimensionsReceipt = "6x8";
+				dbl_Subtotal += 7;
+				dbl_DimensionsPrice = 7;
+			}//End of else if
+			else if(str_Dimensions.equals("$10 | 8x10"))
+			{//Beginning of else if
+				str_DimensionsReceipt = "8x10";
+				dbl_Subtotal += 10;
+				dbl_DimensionsPrice = 10;
+			}//End of else if
+			else if(str_Dimensions.equals("$15 | 12x17"))
+			{//Beginning of else if
+				str_DimensionsReceipt = "12x17";
+				dbl_Subtotal += 15;
+				dbl_DimensionsPrice = 15;
+			}//End of else if
+			//-------Receipt System.out.print
+			System.out.println(" ----------Receipt-------------------------------------------------------------");
+			System.out.println("|\t\t\t\t   Shutter Bugs" +"\t\t\t\t       |");
+			System.out.print("|\t\t\t\t Peterborough, ON\t\t\t       |\n");
+			System.out.print("|\t\t\t\t   705-555-3722\t\t\t               |\n");
+			System.out.print("|\t\t\t   *** You Pic it we Print it*** \t\t       |\n");
+			System.out.print("|   ________________________________________________________________________   |\n");
+			System.out.print("|\t\t\t\t\t\t\t\t\t       |\n");
+			System.out.print("|\t\t\t    Here is your order: " + str_ReceiptName + "\t\t\t       |" + "\n");
+			System.out.print("|Items:\t\t\t\t\t\t\t\t\t       |\n");
+			System.out.print("|\t\t\t\t\t\t\t\t\t       |\n");
+			System.out.print("|" + money.format(dbl_DimensionsPrice) + "  Dimensions (" + str_DimensionsReceipt + ")" + " \t\t\t\t\t\t       |\n");
+			System.out.print("|" +  money.format(dbl_PrintsPrice) + "  " + number.format(dbl_printsInt) + " Prints" + " \t\t\t\t\t\t\t       |\n");
+			if (bool_Red_Eye == true) 
+			{//Beginning of if
+				dbl_Subtotal+=5;
+				System.out.print("|" + money.format(dbl_PhotoCorrectionPrice) + "\tRed Eye" + "\t"  + "\t\t\t\t\t\t\t       |" + "\n");
+			}//End of if
+			if (bool_Over_Exposure == true) 
+			{//Beginning of if
+				dbl_Subtotal+=5;
+				System.out.print("|" + money.format(dbl_PhotoCorrectionPrice) + "\tOver Exposure" + "\t"  + "\t\t\t\t\t\t       |" + "\n");
+			}//End of if
+			if (bool_Colour_Correction == true) 
+			{//Beginning of if
+				dbl_Subtotal+=5;
+				System.out.print("|" + money.format(dbl_PhotoCorrectionPrice) + "\tColour Correction" + "\t"  + "\t\t\t\t\t       |" + "\n");
+			}//End of if
+			if (bool_Blemish_Re_Touching == true) 
+			{//Beginning of if
+				dbl_Subtotal+=5;
+				System.out.print("|" + money.format(dbl_PhotoCorrectionPrice) + "\tBlemish Re-Touching" + "\t"  + "\t\t\t\t\t       |" + "\n");
+			}//End of if
+			if (bool_People_Remover == true)
+			{//Beginning of if
+				dbl_Subtotal+=5;
+				System.out.print("|" + money.format(dbl_PhotoCorrectionPrice) + "\tPeople Remover" + "\t"  + "\t\t\t\t\t\t       |" + "\n");
+			}//End of if
+			if (bool_Skin_Care == true)
+			{//Beginning of if
+				dbl_Subtotal+=5;
+				System.out.print("|"+ money.format(dbl_PhotoCorrectionPrice) + "\tSkin Care" + "\t"  + "\t\t\t\t\t\t       |" + "\n");
+			}//End of if
+			if (bool_Sharpen_Image == true)
+			{//Beginning of if
+				dbl_Subtotal+=5;
+				System.out.print("|" + money.format(dbl_PhotoCorrectionPrice) + "\tSharpen Image" + "\t"  + "\t\t\t\t\t\t       |" + "\n");
+			}//End of if
+			if (bool_Add_Blur == true)
+			{//Beginning of if
+				dbl_Subtotal+=5;
+				System.out.print("|" + money.format(dbl_PhotoCorrectionPrice) + "\tAdd Blur" + "\t"  + "\t\t\t\t\t\t       |" + "\n");
+			}//End of if
+			
+			//Totalling Logic
+			dbl_Total = dbl_Subtotal*dbl_HST_TAX;
+			dbl_Tax_total = dbl_Total-dbl_Subtotal;
+			
+			//Bottom half of receipt System.out prints
+			System.out.print("|\t\t\t\t\t\t\t\t\t       |\n");
+			System.out.print("|" + "Subtotal:" + " " + money.format(dbl_Subtotal) + " " + "\t\t\t\t\t\t\t       |" + "\n");
+			System.out.print("|" + "+HST:" + " " + money.format(dbl_Tax_total) + "\t\t\t\t\t\t\t\t       |" + "\n");
+		    System.out.print("|" + "Your total price is:" + " " + money.format(dbl_Total) + "\t\t\t\t\t\t       |" + "\n");
+			System.out.print("|\t\t\t\t\t\t\t\t\t       |\n");
+			System.out.print("|\t\t     Thank you for printing with Shutter Bugs" +"\t\t       |\n");
+			System.out.print("|\t\t\t\t\t\t\t\t\t       |\n");
+			System.out.println(" ------------------------------------------------------------------------------");
 		}//End of if
 		else if (e.getActionCommand() == Actions.ORDERAGAIN.name())
 		{//Beginning of else if
-			OrderAgain();
+			//Makes ordering objects visible again
+			lbl_YrName.setVisible(true);
+			lbl_NumPrints.setVisible(true);
+			lbl_Dimensions.setVisible(true);
+			lbl_GeneralInfo.setVisible(true);
+			lbl_PhotoCorrectionOptions.setVisible(true);
+			lbl_ThankYou.setVisible(true);
+			sep_Horizontal.setVisible(true);
+			sep_GeneralInfo.setVisible(true);
+			sep_PhotoCorrection.setVisible(true);
+			txt_Name.setVisible(true);
+			txt_NumPrints.setVisible(true);
+			rad_Pickup.setVisible(true);
+			rad_Deliver.setVisible(true);
+			cbo_SelectSizeComboBox.setVisible(true);
+			chk_RedEye.setVisible(true);
+			chk_OverExposure.setVisible(true);
+			chk_ColourCorrection.setVisible(true);
+			chk_BlemishReTouching.setVisible(true);
+			chk_PeopleRemover.setVisible(true);
+			chk_SkinCare.setVisible(true);
+			chk_SharpenImage.setVisible(true);
+			chk_AddBlur.setVisible(true);	
+			btn_TurnOff.setVisible(true);
+
+			//Hides Thank You Objects
+			lbl_ThankYou.setVisible(false);
+			btn_OrderAgain.setVisible(false);
+			
+			//Sets all of the checkboxes to unselected
+			chk_RedEye.setSelected(false);
+			chk_OverExposure.setSelected(false);
+			chk_ColourCorrection.setSelected(false);
+			chk_BlemishReTouching.setSelected(false);
+			chk_PeopleRemover.setSelected(false);
+			chk_SkinCare.setSelected(false);
+			chk_SharpenImage.setSelected(false);
+			chk_AddBlur.setSelected(false);
+			
+			//Resets Text Boxes, Combo Boxes, Radio Buttons, and Variables
+			txt_Name.setText("");
+			txt_NumPrints.setText("");
+			txt_Address.setText("");
+			cbo_SelectSizeComboBox.setSelectedIndex(0);
+			cbo_ChooseCity.setSelectedIndex(0);
+			bg_PickupDeliver.clearSelection();
+			str_Dimensions = "";
+			str_DimensionsReceipt = "";
+			dbl_Subtotal = 0;//Resets Subtotal
+			bool_Red_Eye = false;//Sets to false so that it does not get calculated twice
+			bool_Over_Exposure = false;//Sets to false so that it does not get calculated twice
+			bool_Colour_Correction = false;//Sets to false so that it does not get calculated twice
+			bool_Blemish_Re_Touching = false;//Sets to false so that it does not get calculated twice
+			bool_People_Remover = false;//Sets to false so that it does not get calculated twice
+			bool_Skin_Care = false;//Sets to false so that it does not get calculated twice
+			bool_Sharpen_Image = false;//Sets to false so that it does not get calculated twice
+			bool_Add_Blur = false;//Sets to false so that it does not get calculated twice
+			//Makes space for the next receipt in the console
+			System.out.print("\n\n\n\n\n\n\n\n\n\n\n");
 		}//End of else if
 		else if (e.getActionCommand() == Actions.RADIOPICKUP.name())
 		{//Beginning of else if
@@ -579,41 +617,40 @@ public class GUIInput implements ActionListener {
 		}//End of else if
 		else if (e.getActionCommand() == Actions.REDEYE.name())
 		{//Beginning of else if
-			Red_Eye = true;
+			bool_Red_Eye = true;
 		}//End of else if
 		else if (e.getActionCommand() == Actions.OVER_EXPOSURE.name())
 		{//Beginning of else if
-			Over_Exposure = true;
+			bool_Over_Exposure = true;
 		}//End of else if
 		else if (e.getActionCommand() == Actions.COLOUR_CORRECTION.name())
 		{//Beginning of else if
-			Colour_Correction = true;
+			bool_Colour_Correction = true;
 		}//End of else if
 		else if (e.getActionCommand() == Actions.BLEMISH_RE_TOUCHING.name())
 		{//Beginning of else if
-			Blemish_Re_Touching = true;
+			bool_Blemish_Re_Touching = true;
 		}//End of else if
 		else if (e.getActionCommand() == Actions.PEOPLE_REMOVER.name())
 		{//Beginning of else if
-			People_Remover = true;
+			bool_People_Remover = true;
 		}//End of else if
 		else if (e.getActionCommand() == Actions.SKIN_CARE.name())
 		{//Beginning of else if
-			Skin_Care = true;
+			bool_Skin_Care = true;
 		}//End of else if
 		else if (e.getActionCommand() == Actions.SHARPEN_IMAGE.name())
 		{//Beginning of else if
-			Sharpen_Image = true;
+			bool_Sharpen_Image = true;
 		}//End of else if
 		else if (e.getActionCommand() == Actions.ADD_BLUR.name())
 		{//Beginning of else if
-			Add_Blur = true;
+			bool_Add_Blur = true;
 		}//End of else if
 		else if (e.getActionCommand() == Actions.RESET.name())
 		{//Beginning of else if
 			lbl_YrName.setVisible(true);
 			lbl_NumPrints.setVisible(true);
-			lbl_NumOrdered.setVisible(true);
 			lbl_Dimensions.setVisible(true);
 			lbl_GeneralInfo.setVisible(true);
 			lbl_PhotoCorrectionOptions.setVisible(true);
@@ -626,43 +663,57 @@ public class GUIInput implements ActionListener {
 			rad_Pickup.setVisible(true);
 			rad_Deliver.setVisible(true);
 			cbo_SelectSizeComboBox.setVisible(true);
-			OrderAgain.setVisible(true);
-			checkBox1.setVisible(true);
-			checkBox2.setVisible(true);
-			checkBox3.setVisible(true);
-			checkBox4.setVisible(true);
-			checkBox5.setVisible(true);
-			checkBox6.setVisible(true);
-			checkBox7.setVisible(true);
-			checkBox8.setVisible(true);
-			TurnOffButton.setVisible(true);		
+			btn_OrderAgain.setVisible(true);
+			chk_RedEye.setVisible(true);
+			chk_OverExposure.setVisible(true);
+			chk_ColourCorrection.setVisible(true);
+			chk_BlemishReTouching.setVisible(true);
+			chk_PeopleRemover.setVisible(true);
+			chk_SkinCare.setVisible(true);
+			chk_SharpenImage.setVisible(true);
+			chk_AddBlur.setVisible(true);
+			btn_TurnOff.setVisible(true);		
 			
-			txt_Name.setText("");
-			txt_NumPrints.setText("");
-			txt_Address.setText("");
+			//Sets the Ship to Object to not visible
 			txt_Address.setVisible(false);
 			lbl_ProvinceCountry.setVisible(false);
 			cbo_ChooseCity.setVisible(false);
-			checkBox1.setSelected(false);
-			checkBox2.setSelected(false);
-			checkBox3.setSelected(false);
-			checkBox4.setSelected(false);
-			checkBox5.setSelected(false);
-			checkBox6.setSelected(false);
-			checkBox7.setSelected(false);
-			checkBox8.setSelected(false);
 			
+			//Sets Thank you Objects to not visible
+			btn_OrderAgain.setVisible(false);
 			lbl_ThankYou.setVisible(false);
-			OrderAgain.setVisible(false);
 			
-			cbo_ChooseCity.setSelectedIndex(0);
-			cbo_SelectSizeComboBox.setSelectedIndex(0);
-			bg.clearSelection();
+			//Sets all of the checkboxes to unselected
+			chk_RedEye.setSelected(false);
+			chk_OverExposure.setSelected(false);
+			chk_ColourCorrection.setSelected(false);
+			chk_BlemishReTouching.setSelected(false);
+			chk_PeopleRemover.setSelected(false);
+			chk_SkinCare.setSelected(false);
+			chk_SharpenImage.setSelected(false);
+			chk_AddBlur.setSelected(false);
+			
+			//Resets Text Boxes, Combo Boxes, Radio Buttons, and Variables
+			txt_Name.setText("");//Sets the Txt of the textfield to empty
+			txt_NumPrints.setText("");//Sets the Txt of the textfield to empty
+			txt_Address.setText("");//Sets the Txt of the textfield to empty
+			cbo_ChooseCity.setSelectedIndex(0);//Clears the ComboBox
+			cbo_SelectSizeComboBox.setSelectedIndex(0);//Clears the ComboBox
+			bg_PickupDeliver.clearSelection();//Clears selected radio in the button group
+			dbl_Subtotal = 0;//Resets Subtotal
+			bool_Red_Eye = false;//Sets to false so that it does not get calculated twice
+			bool_Over_Exposure = false;//Sets to false so that it does not get calculated twice
+			bool_Colour_Correction = false;//Sets to false so that it does not get calculated twice
+			bool_Blemish_Re_Touching = false;//Sets to false so that it does not get calculated twice
+			bool_People_Remover = false;//Sets to false so that it does not get calculated twice
+			bool_Skin_Care = false;//Sets to false so that it does not get calculated twice
+			bool_Sharpen_Image = false;//Sets to false so that it does not get calculated twice
+			bool_Add_Blur = false;//Sets to false so that it does not get calculated twice
 		}//End of else if
 		else if (e.getActionCommand() == Actions.EXIT.name())
 		{//Beginning of else if
-			fr_frame.dispose();
-			System.exit(0);
+			fr_frame.dispose();//Closes Frame
+			System.exit(0);//Ends Program
 		}//End of else if
 	}//End of actionPerformed
-}
+}//End of GUIInput
