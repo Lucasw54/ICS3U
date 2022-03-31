@@ -23,7 +23,6 @@ import javax.swing.JSeparator;
 
 public class GUITutorial2 implements ActionListener
 {//Beginning of GUITutorial2
-	
 	//----------Gui Globals
 	private static JPanel pnl_panel;
 	private static JFrame fr_frame;
@@ -101,7 +100,7 @@ public class GUITutorial2 implements ActionListener
 		CHECKLARGE,//Action on the 'Large' CheckBox to enable the OrderCheckBox button.
 		
 		RESET,//Action that resets the GUI elements so that they are enabled again.
-		EXIT////Dispose's the frame and ends the program
+		EXIT//Dispose's the frame and ends the program
 	}//End of Actions
 	
 	public static void CheckComboBox()
