@@ -540,6 +540,23 @@ public class GUIInput implements ActionListener
 			System.out.print("|\t\t     Thank you for printing with Shutter Bugs" +"\t\t       |\n");
 			System.out.print("|\t\t\t\t\t\t\t\t\t       |\n");
 			System.out.println(" ------------------------------------------------------------------------------");
+			
+			//EXTENSION --Makes inputs not enabled on Button pressed (order)
+			txt_Name.setEnabled(false);
+			txt_NumPrints.setEnabled(false);
+			txt_Address.setEnabled(false);
+			cbo_SelectSizeComboBox.setEnabled(false);
+			cbo_ChooseCity.setEnabled(false);
+			rad_Pickup.setEnabled(false);
+			rad_Deliver.setEnabled(false);
+			chk_RedEye.setEnabled(false);
+			chk_OverExposure.setEnabled(false);
+			chk_ColourCorrection.setEnabled(false);
+			chk_BlemishReTouching.setEnabled(false);
+			chk_PeopleRemover.setEnabled(false);
+			chk_SkinCare.setEnabled(false);
+			chk_SharpenImage.setEnabled(false);
+			chk_AddBlur.setEnabled(false);	
 		}//End of if
 		else if (e.getActionCommand() == Actions.ORDERAGAIN.name())
 		{//Beginning of else if
@@ -602,15 +619,34 @@ public class GUIInput implements ActionListener
 			bool_Add_Blur = false;//Sets to false so that it does not get calculated twice
 			//Makes space for the next receipt in the console
 			System.out.print("\n\n\n\n\n\n\n\n\n\n\n");
+			
+			//EXTENSION -- Re-enables ordering inputs
+			txt_Name.setEnabled(true);
+			txt_NumPrints.setEnabled(true);
+			txt_Address.setEnabled(true);
+			cbo_ChooseCity.setEnabled(true);
+			cbo_SelectSizeComboBox.setEnabled(true);
+			rad_Pickup.setEnabled(true);
+			rad_Deliver.setEnabled(true);
+			chk_RedEye.setEnabled(true);
+			chk_OverExposure.setEnabled(true);
+			chk_ColourCorrection.setEnabled(true);
+			chk_BlemishReTouching.setEnabled(true);
+			chk_PeopleRemover.setEnabled(true);
+			chk_SkinCare.setEnabled(true);
+			chk_SharpenImage.setEnabled(true);
+			chk_AddBlur.setEnabled(true);	
 		}//End of else if
 		else if (e.getActionCommand() == Actions.RADIOPICKUP.name())
 		{//Beginning of else if
+			//EXTENSION
 			lbl_ProvinceCountry.setVisible(false);
 			txt_Address.setVisible(false);
 			cbo_ChooseCity.setVisible(false);
 		}//End of else if
 		else if (e.getActionCommand() == Actions.RADIODELIVER.name())
 		{//Beginning of else if
+			//EXTENSION
 			lbl_ProvinceCountry.setVisible(true);
 			txt_Address.setVisible(true);
 			cbo_ChooseCity.setVisible(true);
@@ -709,6 +745,23 @@ public class GUIInput implements ActionListener
 			bool_Skin_Care = false;//Sets to false so that it does not get calculated twice
 			bool_Sharpen_Image = false;//Sets to false so that it does not get calculated twice
 			bool_Add_Blur = false;//Sets to false so that it does not get calculated twice
+			
+			//EXTENSION --  Re-Enables Inputs for second order
+			txt_Name.setEnabled(true);
+			txt_NumPrints.setEnabled(true);
+			txt_Address.setEnabled(true);
+			cbo_ChooseCity.setEnabled(true);
+			cbo_SelectSizeComboBox.setEnabled(true);
+			rad_Pickup.setEnabled(true);
+			rad_Deliver.setEnabled(true);
+			chk_RedEye.setEnabled(true);
+			chk_OverExposure.setEnabled(true);
+			chk_ColourCorrection.setEnabled(true);
+			chk_BlemishReTouching.setEnabled(true);
+			chk_PeopleRemover.setEnabled(true);
+			chk_SkinCare.setEnabled(true);
+			chk_SharpenImage.setEnabled(true);
+			chk_AddBlur.setEnabled(true);	
 		}//End of else if
 		else if (e.getActionCommand() == Actions.EXIT.name())
 		{//Beginning of else if
