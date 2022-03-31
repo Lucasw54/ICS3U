@@ -128,8 +128,8 @@ public class GUIInput implements ActionListener
 	
 	public enum Actions
 	{//Beginning of Actions
-		RADIOPICKUP,
-		RADIODELIVER,
+		RADIOPICKUP,//Action that hides Deliver Objects
+		RADIODELIVER,//Action that shows Deliver Objects
 		
 		REDEYE,//Action that sets RedEye to true so that the receipt know to print it out
 		OVER_EXPOSURE,//Action that sets Over Exposure to true so that the receipt know to print it out
