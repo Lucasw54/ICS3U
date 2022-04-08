@@ -13,6 +13,7 @@ import java.text.DecimalFormat;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -22,7 +23,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
@@ -55,6 +58,8 @@ public class Quiz implements ActionListener
 	private static JTextField txt_Question5;
 	private static JTextField txt_Question6;
 	
+	//TextAreas
+	private static JTextArea txtArea_Results;
 	//Images - (Labels)
 	private static JLabel img_CodeBackground;
 	private static BufferedImage BufferedCodeBackground;
@@ -86,7 +91,8 @@ public class Quiz implements ActionListener
 	private static JRadioButton rad_Q2AnswerD;
 	//Combo Boxes
 	
-	private static JComboBox<String> cbo_SelectSizeComboBox;
+	private static JComboBox<String> cbo_Question9;
+	private static JComboBox<String> cbo_Question10;
 	
 	//Check Boxes
 	
@@ -109,6 +115,7 @@ public class Quiz implements ActionListener
 	private static JButton btn_FalseBottom;
 	private static JButton btn_Quit;
 	private static JButton btn_Reset;
+	private static JButton btn_Results;
 	
 	//--------Other Globals 
 	private static Quiz instance;
@@ -220,6 +227,8 @@ public class Quiz implements ActionListener
 		Q8A2,
 		Q8A3,
 		Q8A4,
+		Q9,
+		Q10,
 		TRUETOP,
 		FALSETOP,
 		TRUEBOTTOM,
@@ -231,8 +240,8 @@ public class Quiz implements ActionListener
 	
 	public static void GUI() {
 		instance = new Quiz();
-		String[] optionsToChoose = { "Choose Dimensions", "$5 | 4x6", "$7 | 6x8", "$10 | 8x10", "$15 | 12x17"};
-		String[] optionsToChoose2 = { "Choose City", "Barrie", "Belleville", "Cambridge"};
+		String[] optionsToChoose = { "Select Answer"};
+		String[] optionsToChoose2 = { "Select Answer"};
 		//Panel Config
 		pnl_panel = new JPanel();
 		pnl_panel.setBackground(NEW_GREEN);
@@ -281,7 +290,7 @@ public class Quiz implements ActionListener
 		lbl_Name.setFont(new Font("Times New Roman", Font.BOLD, 32));
 		
 		lbl_Score = new JLabel(number.format(Score) + " /10");
-		lbl_Score.setBounds(970,10,1100,70);
+		lbl_Score.setBounds(965,10,1100,70);
 		pnl_panel.add(lbl_Score);
 		lbl_Score.setFont(new Font("Times New Roman", Font.BOLD, 72));
 		
@@ -450,6 +459,17 @@ public class Quiz implements ActionListener
 		
 		
 		//Combo Boxes
+		cbo_Question9 = new JComboBox<>(optionsToChoose);
+		cbo_Question9.setBounds(100, 245, 400, 30);
+		cbo_Question9.setActionCommand(Actions.Q9.name());
+		cbo_Question9.addActionListener(instance);
+		pnl_panel.add(cbo_Question9);
+		
+		cbo_Question10 = new JComboBox<>(optionsToChoose2);
+		cbo_Question10.setBounds(100, 520, 400, 30);
+		cbo_Question10.setActionCommand(Actions.Q10.name());
+		cbo_Question10.addActionListener(instance);
+		pnl_panel.add(cbo_Question10);
 		
 		//Check Boxes
 		chk_Q7AnswerA = new JCheckBox("");  
@@ -501,6 +521,11 @@ public class Quiz implements ActionListener
         pnl_panel.add(chk_Q8AnswerD);
 	
 		//Text Areas 
+        txtArea_Results = new JTextArea(5, 20);
+        txtArea_Results.setBounds(80,100,990,700); 
+        txtArea_Results.setEditable(false);
+        pnl_panel.add(txtArea_Results);
+        txtArea_Results.setFont(new Font("Times New Roman", Font.BOLD, 32));
 		
 		//Buttons
 		btn_Start = new JButton("Start");
@@ -521,6 +546,12 @@ public class Quiz implements ActionListener
 		btn_Reset.setActionCommand(Actions.RESET.name());
 		btn_Reset.addActionListener(instance);
 		pnl_panel.add(btn_Reset);
+		
+		btn_Results = new JButton("Results");
+		btn_Results.setBounds(785, 15, 80, 60);
+		btn_Results.setActionCommand(Actions.RESULTS.name());
+		btn_Results.addActionListener(instance);
+		pnl_panel.add(btn_Results);
 		
 		btn_Previous = new JButton("Previous");
 		btn_Previous.setBounds(290, 15, 80, 60);
@@ -618,6 +649,7 @@ public class Quiz implements ActionListener
 		btn_FalseBottom.setVisible(false);
 		btn_Previous.setVisible(false);
 		btn_Reset.setVisible(false);
+		btn_Results.setVisible(false);
 		txt_Name.setVisible(false);
 		txt_Question5.setVisible(false);
 		txt_Question6.setVisible(false);
@@ -629,6 +661,9 @@ public class Quiz implements ActionListener
 		chk_Q8AnswerB.setVisible(false);
 		chk_Q8AnswerC.setVisible(false);
 		chk_Q8AnswerD.setVisible(false);
+		cbo_Question9.setVisible(false);
+		cbo_Question10.setVisible(false);
+		txtArea_Results.setVisible(false);
 		
 		btn_Next.setEnabled(false);
 		bg_Difficulty.clearSelection();
@@ -769,10 +804,15 @@ public class Quiz implements ActionListener
 		chk_Q8AnswerB.setVisible(true);
 		chk_Q8AnswerC.setVisible(true);
 		chk_Q8AnswerD.setVisible(true);
+		btn_Next.setVisible(true);
+		
+		cbo_Question9.setVisible(false);
+		cbo_Question10.setVisible(false);
 		
 		if(Question7Submitted == false) {
 			btn_Next.setEnabled(false);
 		}
+		btn_Results.setVisible(false);
 	}
 	public static void QuestionPage5() {
 		lbl_Question9Title.setVisible(true);
@@ -795,9 +835,31 @@ public class Quiz implements ActionListener
 		chk_Q8AnswerB.setVisible(false);
 		chk_Q8AnswerC.setVisible(false);
 		chk_Q8AnswerD.setVisible(false);
+		txtArea_Results.setVisible(false);
+		
+		cbo_Question9.setVisible(true);
+		cbo_Question10.setVisible(true);
+		btn_Next.setVisible(false);
+		
+		
+		if(Question9Submitted == false) {
+			btn_Results.setEnabled(false);
+		}
+		btn_Results.setVisible(true);
+		lbl_Score.setVisible(true);
+		
 	}
 	public static void Results() {
+		lbl_Question9Title.setVisible(false);
+		lbl_Question10Title.setVisible(false);
+		lbl_Score.setVisible(false);
 		
+		btn_Results.setVisible(false);
+		
+		cbo_Question9.setVisible(false);
+		cbo_Question10.setVisible(false);
+		
+		txtArea_Results.setVisible(true);
 	}
 	public static void main(String[] args) {
 		GUI();
@@ -869,6 +931,15 @@ public class Quiz implements ActionListener
 			chk_Q8AnswerB.setText("Compilled to Binaries");// This is C++
 			chk_Q8AnswerC.setText("Reusable code");
 			chk_Q8AnswerD.setText("Widespread and Relevant");
+			
+			String[] Array_Question9 = { "Select Answer", "Checks a Value", "Sets a Value" , "Adds a Value", "Subtracts a Value"};
+			String[] Array_Question10 = { "Select Answer","A container that holds values", "A Method" , "A Object" , "A Terrible Thing"};
+			
+			DefaultComboBoxModel<String> OptionsToChooseQ9 = new DefaultComboBoxModel<>(Array_Question9);
+			DefaultComboBoxModel<String> OptionsToChooseQ10 = new DefaultComboBoxModel<>(Array_Question10);
+			
+			cbo_Question9.setModel(OptionsToChooseQ9);
+			cbo_Question10.setModel(OptionsToChooseQ10);
 			
 			Question1CorrectAnswer = "A";
 			Question2CorrectAnswer = "C";
@@ -1226,6 +1297,24 @@ public class Quiz implements ActionListener
 				}
 			}
 		}//End of else if
+		else if (e.getActionCommand() == Actions.Q9.name())
+		{//Beginning of else if
+			Question9Input = (String) cbo_Question9.getSelectedItem();
+			if(Question9Submitted == false) {
+				if(Question9Input != "" && Question10Input != "") {
+					btn_Results.setEnabled(true);
+				}
+			}
+		}//End of else if
+		else if (e.getActionCommand() == Actions.Q10.name())
+		{//Beginning of else if
+			Question10Input = (String) cbo_Question10.getSelectedItem();
+			if(Question9Submitted == false) {
+				if(Question9Input != "" && Question10Input != "") {
+					btn_Results.setEnabled(true);
+				}
+			}
+		}//End of else if
 		else if (e.getActionCommand() == Actions.TRUETOP.name())
 		{//Beginning of else if
 			Question3Input = "True";
@@ -1295,6 +1384,10 @@ public class Quiz implements ActionListener
 			}
 			else if (dbl_Page == 7) {
 				QuestionPage5();
+				dbl_Page -= 1;
+			}
+			else if (dbl_Page == 8) {
+				Results();
 				dbl_Page -= 1;
 			}
 		}//End of else if
@@ -1770,7 +1863,37 @@ public class Quiz implements ActionListener
 		}//End of else if
 		else if (e.getActionCommand() == Actions.RESULTS.name())
 		{//Beginning of else if
-
+			if (dbl_Page == 6) {
+				Results();
+				dbl_Page += 1;
+			}
+			if(ScoreCheck.equals("Easy")) {
+				//Easy Question 9
+				if(Question9Input.equals ("Sets a Value") && Question9Submitted == false){
+					Score += 1;
+					cbo_Question9.setEnabled(false);
+				}
+				else {
+					cbo_Question9.setEnabled(false);
+				}
+				//Easy Question 10
+				if(Question10Input.equals ("A container that holds values")&& Question10Submitted == false){
+					Score += 1;
+					cbo_Question10.setEnabled(false);
+				}
+				else {
+					cbo_Question10.setEnabled(false);
+				}
+			}
+			
+		Name = txt_Name.getText();
+		if(Question9Submitted == false) {
+			txtArea_Results.append("Player: " +  Name + "\n");
+		    txtArea_Results.append("You scored " +  number.format(Score) +"/10\n");
+		}
+		Question9Submitted = true;
+		Question10Submitted = true;
+		lbl_Score.setText(number.format(Score) + " /10");
 		}//End of else if
 		else if (e.getActionCommand() == Actions.RESET.name())
 		{//Beginning of else if
