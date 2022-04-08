@@ -1,3 +1,11 @@
+/*
+ * Name:Lucas Wall
+ * Class code: ICS3U 
+ * Date:Friday, April 7, 2022 
+ * Assignment #: 13
+ * Description: Using all sorts of GUI Inputs create a Quiz. With logic to record the persons name, score
+ * and which questions were correct vs. incorrect.
+ */
 package com.LucasWall.QuizAssignment;
 //Imports
 import java.awt.Color;
@@ -32,157 +40,158 @@ import javax.swing.border.EtchedBorder;
 
 public class Quiz implements ActionListener
 {//Beginning of Quiz
-	private static JPanel pnl_panel;
-	private static JFrame fr_frame;
+	//------Gui Globals
+	public static JPanel pnl_panel;
+	public static JFrame fr_frame;
 	
 	//Labels
-	private static JLabel lbl_TitleLabel;
-	private static JLabel lbl_Name;
-	private static JLabel lbl_Score;
-	private static JLabel lbl_Question1Title;
-	private static JLabel lbl_Question2Title;
-	private static JLabel lbl_Question3Title;
-	private static JLabel lbl_Question4Title;
-	private static JLabel lbl_Question5Title;
-	private static JLabel lbl_Question6Title;
-	private static JLabel lbl_Question7Title;
-	private static JLabel lbl_Question8Title;
-	private static JLabel lbl_Question9Title;
-	private static JLabel lbl_Question10Title;
+	public static JLabel lbl_TitleLabel;
+	public static JLabel lbl_Name;
+	public static JLabel lbl_Score;
+	public static JLabel lbl_Question1Title;
+	public static JLabel lbl_Question2Title;
+	public static JLabel lbl_Question3Title;
+	public static JLabel lbl_Question4Title;
+	public static JLabel lbl_Question5Title;
+	public static JLabel lbl_Question6Title;
+	public static JLabel lbl_Question7Title;
+	public static JLabel lbl_Question8Title;
+	public static JLabel lbl_Question9Title;
+	public static JLabel lbl_Question10Title;
 	
 	//Separators
-	private static JSeparator sep_Title;
+	public static JSeparator sep_Title;
 	
 	//TextFields
-	private static JTextField txt_Name;
-	private static JTextField txt_Question5;
-	private static JTextField txt_Question6;
+	public static JTextField txt_Name;
+	public static JTextField txt_Question5;
+	public static JTextField txt_Question6;
 	
 	//TextAreas
-	private static JTextArea txtArea_Results;
-	//Images - (Labels)
-	private static JLabel img_CodeBackground;
-	private static BufferedImage BufferedCodeBackground;
-	private static Image ImageCodeBackground;
-	private static ImageIcon icn_CodeBackground;
+	public static JTextArea txtArea_Results;
 	
-	private static JLabel img_Java;
-	private static BufferedImage BufferedJava;
-	private static Image ImageJava;
-	private static ImageIcon icn_Java;
+	//Images - (Labels)
+	public static JLabel img_CodeBackground;
+	public static BufferedImage BufferedCodeBackground;
+	public static Image ImageCodeBackground;
+	public static ImageIcon icn_CodeBackground;
+	
+	public static JLabel img_Java;
+	public static BufferedImage BufferedJava;
+	public static Image ImageJava;
+	public static ImageIcon icn_Java;
 	
 	//Radio Buttons
-	private static ButtonGroup bg_Difficulty;
-	private static JRadioButton rad_Easy;
-	private static JRadioButton rad_Medium;
-	private static JRadioButton rad_Hard;
-	private static JRadioButton rad_Insane;
+	public static ButtonGroup bg_Difficulty;
+	public static JRadioButton rad_Easy;
+	public static JRadioButton rad_Medium;
+	public static JRadioButton rad_Hard;
+	public static JRadioButton rad_Insane;
 	
-	private static ButtonGroup bg_Question1;
-	private static JRadioButton rad_Q1AnswerA;
-	private static JRadioButton rad_Q1AnswerB;
-	private static JRadioButton rad_Q1AnswerC;
-	private static JRadioButton rad_Q1AnswerD;
+	public static ButtonGroup bg_Question1;
+	public static JRadioButton rad_Q1AnswerA;
+	public static JRadioButton rad_Q1AnswerB;
+	public static JRadioButton rad_Q1AnswerC;
+	public static JRadioButton rad_Q1AnswerD;
 	
-	private static ButtonGroup bg_Question2;
-	private static JRadioButton rad_Q2AnswerA;
-	private static JRadioButton rad_Q2AnswerB;
-	private static JRadioButton rad_Q2AnswerC;
-	private static JRadioButton rad_Q2AnswerD;
+	public static ButtonGroup bg_Question2;
+	public static JRadioButton rad_Q2AnswerA;
+	public static JRadioButton rad_Q2AnswerB;
+	public static JRadioButton rad_Q2AnswerC;
+	public static JRadioButton rad_Q2AnswerD;
+	
 	//Combo Boxes
-	
-	private static JComboBox<String> cbo_Question9;
-	private static JComboBox<String> cbo_Question10;
+	public static JComboBox<String> cbo_Question9;
+	public static JComboBox<String> cbo_Question10;
 	
 	//Check Boxes
-	
-	private static JCheckBox chk_Q7AnswerA;
-	private static JCheckBox chk_Q7AnswerB;
-	private static JCheckBox chk_Q7AnswerC;
-	private static JCheckBox chk_Q7AnswerD;
-	private static JCheckBox chk_Q8AnswerA;
-	private static JCheckBox chk_Q8AnswerB;
-	private static JCheckBox chk_Q8AnswerC;
-	private static JCheckBox chk_Q8AnswerD;
+	public static JCheckBox chk_Q7AnswerA;
+	public static JCheckBox chk_Q7AnswerB;
+	public static JCheckBox chk_Q7AnswerC;
+	public static JCheckBox chk_Q7AnswerD;
+	public static JCheckBox chk_Q8AnswerA;
+	public static JCheckBox chk_Q8AnswerB;
+	public static JCheckBox chk_Q8AnswerC;
+	public static JCheckBox chk_Q8AnswerD;
 	
 	//Buttons
-	private static JButton btn_Start;
-	private static JButton btn_Previous;
-	private static JButton btn_Next;
-	private static JButton btn_TrueTop;
-	private static JButton btn_FalseTop;
-	private static JButton btn_TrueBottom;
-	private static JButton btn_FalseBottom;
-	private static JButton btn_Quit;
-	private static JButton btn_Reset;
-	private static JButton btn_Results;
+	public static JButton btn_Start;
+	public static JButton btn_Previous;
+	public static JButton btn_Next;
+	public static JButton btn_TrueTop;
+	public static JButton btn_FalseTop;
+	public static JButton btn_TrueBottom;
+	public static JButton btn_FalseBottom;
+	public static JButton btn_Quit;
+	public static JButton btn_Reset;
+	public static JButton btn_Results;
 	
 	//--------Other Globals 
-	private static Quiz instance;
+	public static Quiz instance;
 	public static JProgressBar bar_Load = new JProgressBar();
-	private static String str_Difficulty = "";
-	private static double dbl_Page = 1;
-	private static double Score = 0;
-	private static String ScoreCheck = "";
-	private static String[] Letters = {"A","B","C","D"};
-	private static String Name ="";
+	public static String str_Difficulty = "";
+	public static double dbl_Page = 1;
+	public static double Score = 0;
+	public static String ScoreCheck = "";
+	public static String[] Letters = {"A","B","C","D"};
+	public static String Name ="";
 	
-	private static String Question1 = "";
-	private static String Question2 = "";
-	private static String Question3 = "";
-	private static String Question4 = "";
-	private static String Question5 = "";
-	private static String Question6 = "";
-	private static String Question7 = "";
-	private static String Question8 = "";
-	private static String Question9 = "";
-	private static String Question10 = "";
+	public static String Question1 = "";
+	public static String Question2 = "";
+	public static String Question3 = "";
+	public static String Question4 = "";
+	public static String Question5 = "";
+	public static String Question6 = "";
+	public static String Question7 = "";
+	public static String Question8 = "";
+	public static String Question9 = "";
+	public static String Question10 = "";
 	
-	private static String Question1Input = "";
-	private static String Question2Input = "";
-	private static String Question3Input = "";
-	private static String Question4Input = "";
-	private static String Question5Input = "";
-	private static String Question6Input = "";
+	public static String Question1Input = "";
+	public static String Question2Input = "";
+	public static String Question3Input = "";
+	public static String Question4Input = "";
+	public static String Question5Input = "";
+	public static String Question6Input = "";
 	
-	private static String Question7Input = "";
-	private static String Question7AInput = "";
-	private static String Question7BInput = "";
-	private static String Question7CInput = "";
-	private static String Question7DInput = "";
+	public static String Question7Input = "";
+	public static String Question7AInput = "";
+	public static String Question7BInput = "";
+	public static String Question7CInput = "";
+	public static String Question7DInput = "";
 	
-	private static String Question8Input = "";
-	private static String Question8AInput = "";
-	private static String Question8BInput = "";
-	private static String Question8CInput = "";
-	private static String Question8DInput = "";
+	public static String Question8Input = "";
+	public static String Question8AInput = "";
+	public static String Question8BInput = "";
+	public static String Question8CInput = "";
+	public static String Question8DInput = "";
 	
-	private static String Question9Input = "";
-	private static String Question10Input = "";
+	public static String Question9Input = "";
+	public static String Question10Input = "";
 	
-	private static String Question1CorrectAnswer = "";
-	private static String Question2CorrectAnswer = "";
-	private static String Question3CorrectAnswer = "";
-	private static String Question4CorrectAnswer = "";
-	private static String Question5CorrectAnswer = "";
-	private static String Question6CorrectAnswer = "";
-	private static String Question7CorrectAnswer = "";
-	private static String Question8CorrectAnswer = "";
-	private static String Question9CorrectAnswer = "";
-	private static String Question10CorrectAnswer = "";
+	public static String Question1CorrectAnswer = "";
+	public static String Question2CorrectAnswer = "";
+	public static String Question3CorrectAnswer = "";
+	public static String Question4CorrectAnswer = "";
+	public static String Question5CorrectAnswer = "";
+	public static String Question6CorrectAnswer = "";
+	public static String Question7CorrectAnswer = "";
+	public static String Question8CorrectAnswer = "";
+	public static String Question9CorrectAnswer = "";
+	public static String Question10CorrectAnswer = "";
 	
-	private static Boolean Question1Submitted = false;
-	private static Boolean Question2Submitted = false;
-	private static Boolean Question3Submitted = false;
-	private static Boolean Question4Submitted = false;
-	private static Boolean Question5Submitted = false;
-	private static Boolean Question6Submitted = false;
-	private static Boolean Question7Submitted = false;
-	private static Boolean Question8Submitted = false;
-	private static Boolean Question9Submitted = false;
-	private static Boolean Question10Submitted = false;
+	public static Boolean Question1Submitted = false;
+	public static Boolean Question2Submitted = false;
+	public static Boolean Question3Submitted = false;
+	public static Boolean Question4Submitted = false;
+	public static Boolean Question5Submitted = false;
+	public static Boolean Question6Submitted = false;
+	public static Boolean Question7Submitted = false;
+	public static Boolean Question8Submitted = false;
+	public static Boolean Question9Submitted = false;
+	public static Boolean Question10Submitted = false;
 	
-	private static Boolean Check = true;
+	public static Boolean Check = true;
 	
 	//------New Colours
 	public static final Color NEW_GREEN = new Color(212, 255, 238);
@@ -191,11 +200,7 @@ public class Quiz implements ActionListener
 	public static final Color TRUE = new Color(66, 135, 245);
 	public static final Color FALSE = new Color(247, 69, 25);
 
-	//------Constant Variables
-	public static final double dbl_HST_TAX  = 1.13;
-	
 	//------Decimal Formats
-	public static DecimalFormat money = new DecimalFormat("$###,###,##0.00");
 	public static DecimalFormat number = new DecimalFormat("###,###,###");
 	
 	//------Borders
@@ -240,8 +245,8 @@ public class Quiz implements ActionListener
 	
 	public static void GUI() {
 		instance = new Quiz();
-		String[] optionsToChoose = { "Select Answer"};
-		String[] optionsToChoose2 = { "Select Answer"};
+		String[] OptionsToChoseQuestion9 = { "Select Answer"};
+		String[] OptionsToChoseQuestion10 = { "Select Answer"};
 		//Panel Config
 		pnl_panel = new JPanel();
 		pnl_panel.setBackground(NEW_GREEN);
@@ -459,13 +464,13 @@ public class Quiz implements ActionListener
 		
 		
 		//Combo Boxes
-		cbo_Question9 = new JComboBox<>(optionsToChoose);
+		cbo_Question9 = new JComboBox<>(OptionsToChoseQuestion9);
 		cbo_Question9.setBounds(100, 245, 400, 30);
 		cbo_Question9.setActionCommand(Actions.Q9.name());
 		cbo_Question9.addActionListener(instance);
 		pnl_panel.add(cbo_Question9);
 		
-		cbo_Question10 = new JComboBox<>(optionsToChoose2);
+		cbo_Question10 = new JComboBox<>(OptionsToChoseQuestion10);
 		cbo_Question10.setBounds(100, 520, 400, 30);
 		cbo_Question10.setActionCommand(Actions.Q10.name());
 		cbo_Question10.addActionListener(instance);
@@ -1951,6 +1956,5 @@ public class Quiz implements ActionListener
 			fr_frame.dispose();
 			System.exit(0);
 		}//End of else if
-		
 	}//End of ActionPerformed
 }//End of Quiz
