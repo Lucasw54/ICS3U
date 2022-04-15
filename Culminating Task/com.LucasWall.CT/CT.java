@@ -646,7 +646,6 @@ public class CT implements ActionListener{
 			}//End of catch
 		}//End of while
 	}
-	@SuppressWarnings("unchecked")
 	@Override
 	public void actionPerformed(ActionEvent e) { 
 		if (e.getActionCommand() == Actions.HISTORY.name()) {
@@ -1147,69 +1146,6 @@ public class CT implements ActionListener{
 			txt_b.setText("");
 			txt_c.setText("");
 		}
-		/*
-		else if (e.getActionCommand() == Actions.TYPE.name()) {
-			Type = (String) cbo_ConversionType.getSelectedItem();
-			if(Type.equals("Select Type of Conversion")) {
-				cbo_UnitStart.setEnabled(false);
-				cbo_UnitEnd.setEnabled(false);
-			}
-			else if(Type.equals("Distance")) {
-				String[] Array_DistanceStart = {"Select Unit", "Millimeter", "Centimeter", "Meter", "Kilometer"};
-				String[] Array_DistanceEnd = {"Select Unit", "Millimeter", "Centimeters", "Meter", "Kilometer"};
-				
-				DefaultComboBoxModel<String> Start = new DefaultComboBoxModel<>(Array_DistanceStart);
-				DefaultComboBoxModel<String> End = new DefaultComboBoxModel<>(Array_DistanceEnd);
-				cbo_UnitStart.setModel(Start);
-				cbo_UnitEnd.setModel(End);
-				
-				cbo_UnitStart.setEnabled(true);
-				cbo_UnitEnd.setEnabled(true);
-			}
-			else if(Type.equals("Pressure")) {
-				String[] Array_DistanceStart = {"Select Unit", "Pascal", "Kilopascal", "Torr", "Atmosphere"};
-				String[] Array_DistanceEnd = {"Select Unit", "Pascal", "Kilopascal", "Torr", "Atmosphere"};
-				
-				DefaultComboBoxModel<String> Start = new DefaultComboBoxModel<>(Array_DistanceStart);
-				DefaultComboBoxModel<String> End = new DefaultComboBoxModel<>(Array_DistanceEnd);
-				cbo_UnitStart.setModel(Start);
-				cbo_UnitEnd.setModel(End);
-				
-				cbo_UnitStart.setEnabled(true);
-				cbo_UnitEnd.setEnabled(true);
-			}
-			else if(Type.equals("Temperature")) {
-				String[] Array_DistanceStart = {"Select Unit", "Celsius", "Fahrenheit", "Kelvin"};
-				String[] Array_DistanceEnd = {"Select Unit", "Celsius", "Fahrenheit", "Kelvin"};
-				
-				DefaultComboBoxModel<String> Start = new DefaultComboBoxModel<>(Array_DistanceStart);
-				DefaultComboBoxModel<String> End = new DefaultComboBoxModel<>(Array_DistanceEnd);
-				cbo_UnitStart.setModel(Start);
-				cbo_UnitEnd.setModel(End);
-				
-				cbo_UnitStart.setEnabled(true);
-				cbo_UnitEnd.setEnabled(true);
-			}
-			else if(Type.equals("Energy")) {
-				String[] Array_DistanceStart = {"Select Unit", "Kilocalorie", "Joule", "Kilojoule"};
-				String[] Array_DistanceEnd = {"Select Unit", "Celsius", "Fahrenheit", "Kelvin"};
-				
-				DefaultComboBoxModel<String> Start = new DefaultComboBoxModel<>(Array_DistanceStart);
-				DefaultComboBoxModel<String> End = new DefaultComboBoxModel<>(Array_DistanceEnd);
-				cbo_UnitStart.setModel(Start);
-				cbo_UnitEnd.setModel(End);
-				
-				cbo_UnitStart.setEnabled(true);
-				cbo_UnitEnd.setEnabled(true);
-			}
-		}
-		else if (e.getActionCommand() == Actions.UNITSTART.name()) {
-			
-		}
-		else if (e.getActionCommand() == Actions.UNITEND.name()) {
-			
-		}
-		*/
 		else if (e.getActionCommand() == Actions.QUIT.name()) {
 			fr_frame.dispose();
 			System.exit(0);
