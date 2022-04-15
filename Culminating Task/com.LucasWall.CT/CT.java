@@ -115,11 +115,6 @@ public class CT implements ActionListener
 	//------Non GUI Globals 
 	//Strings
 	private static String Register = "";
-	private static String History1 = "";
-	private static String History2 = "";
-	private static String History3 = "";
-	private static String History4 = "";
-	private static String History5 = "";
 	private static String OperatorUsed = "";
 	private static String AnswerString = "";
 	private static String str_AngleA = "";
@@ -1158,11 +1153,6 @@ public class CT implements ActionListener
 		}//End of else if
 		else if (e.getActionCommand() == Actions.RESET.name()) 
 		{//Beginning of else if
-			History5 = History4;
-			History4 = History3;
-			History3 = History2;
-			History2 = History1;
-			History1 = txt_Display.getText();
 			DisplayString ="0";
 			Register = "";
 			RegisterNumber = 0;
